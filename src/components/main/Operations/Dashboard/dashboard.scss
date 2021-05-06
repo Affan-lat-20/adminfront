@@ -1,0 +1,943 @@
+$dark-blue: #042446;
+$light-grey: #727276;
+$dark-grey: #545151;
+$feature-paragraph: #959090;
+$orange: #F6413E;
+$green: #20B871;
+$ambassador: #0b0951;
+$gold: #cdbd2f;
+$silver: #c2c2ba;
+$white:#ffffff;
+
+
+.ellipsis {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .capitalize{
+      text-transform: capitalize;
+  }
+
+  .influencer-image{
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+}
+ .influencer-image img {
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+
+}
+
+
+.dashboard-side-navigation {
+    background-color:#042446!important;
+    color: white;
+    height: 100%;
+    min-height: 100vh;
+}
+.dashboard-flonzo-logo {
+    padding: 10px 0 9px 0;
+    text-align: center;
+    background-color: $dark-blue;
+}
+.dashboard-brand-profile {
+    padding: 30px 0 20px 0;
+    text-align: center;
+    // background-color: #000e1d;
+}
+.dashboard-brand-profile-image {
+    // width: 150px;
+    // height: 150px;
+    margin: 0 auto;
+    // border: 3px solid #ffffff;
+    border-radius: 99px;
+    width: 86px;
+    height: 86px;
+}
+.dashboard-brand-profile-image img {
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    border: 2px solid #ffffff;
+
+}
+.dashboard-brand-profile-heading {
+  
+    padding-top: 40px;
+    font-size: 18px;
+    font-weight: bold;
+    // color: $dark-blue;
+    color: #ffffff!important;
+    text-transform: capitalize;
+}
+.dashboard-side-navbar a {
+    width: 100%;
+    transition: 0.4s;
+    color: white;
+    transition: 0.4s;
+    font-size: 14px;
+}
+.dashboard-side-navbar a:hover {
+    color: $orange;
+}
+.dashboard-link-icon {
+    padding-right: 10px;
+}
+.dashboard-campaigns-div {
+    display: inline-block;
+    padding: 0 1rem;
+    width: 100%;
+    transition: 0.4s;
+}
+.dashboard-campaigns-div:hover {
+    color: $orange;
+}
+.dashboard-campaign-dd {
+    display: inline-block;
+    padding-left: 0;
+}
+.dashboard-campaign-dd > a {
+    padding-left: 0;
+}
+.dashboard-campaign-dd .dropdown-toggle::after {
+    display: none;
+}
+.dashboard-dropdown-icon {
+    background-image: url("../../../../assets/images/dropdown-icon.png");
+    background-position: 106% 60%;
+    background-repeat: no-repeat;
+    -webkit-appearance: none;
+  }
+  .dashboard-box-4, .dashboard-box-12 {
+    background: #FFFFFF;
+    box-shadow: -2px 14px 30px rgba(0, 0, 0, 0.18);
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+  }
+  .dashboard-box-4 h3 {
+      font-size: 18px;
+      font-weight: 600;
+      min-height: 40px;
+  }
+  .dashboard-box-4 h1 {
+    font-size: 36px;
+    font-weight: bold;
+  }
+  .product-info-box {
+    text-align: left;
+    padding: 30px;
+  }
+  .social-strength-wrapper {
+    background: #FFFFFF;
+    box-shadow: -2px 6px 40px rgba(0, 0, 0, 0.18);
+    border-radius: 10px;
+    padding: 30px 15px;
+  }
+  .social-strength-wrapper h3, .dashboard-feature-heading {
+      font-size: 20px;
+      color: $dark-grey;
+      font-weight: bold;
+  }
+  .social-strength-wrapper h4 {
+      font-size: 16px;
+      color: $dark-grey;
+  }
+  .recent-post-visual img {
+      width: 100%;
+  }
+  .post-insights-heading {
+    font-size: 16px;
+    font-weight: 600;
+    color: $dark-grey;
+}
+.post-insights-paragraph {
+    font-size: 14px;
+    color: $dark-grey;
+}
+.post-insight-box {
+    background: #FFFFFF;
+    box-shadow: -2px 14px 30px rgba(0, 0, 0, 0.18);
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+}
+.post-insight-box h3 {
+    font-size: 20px;
+    color: $dark-grey;
+    font-weight: bold;
+}
+.post-insight-box h4 {
+    font-size: 18px;
+    color: $dark-grey;
+}
+.dashboard-products-wrapper {
+    background: #FFFFFF;
+    box-shadow: -2px 14px 30px rgba(0, 0, 0, 0.18);
+    border-radius: 10px;
+    padding: 30px 15px;
+}
+.dashboard-product-img {
+    text-align: center;
+}
+.dashboard-product-img img {
+    background: #FFFFFF; 
+    box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.16); 
+    border-radius: 10px;
+}
+.dashboard-product-categories-flex-wrapper {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin: auto;
+    flex-wrap: inherit;
+}
+.dashboard-product-categories {
+    background: #FFFFFF;
+    box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.16);
+    border-radius: 10px;
+    width: 31%;
+    text-align: center;
+    transition: 0.4s;
+    margin: 0 15px 15px 0;
+}
+.dashboard-product-categories a, .dashboard-product-categories p {
+    padding: 15px;
+    width: 100%;
+    display: block;
+    color: $dark-grey;
+    transition: 0.4s;
+    font-weight: 600;
+    margin-bottom: 0;
+}
+.dashboard-product-categories a:hover {
+    text-decoration: none;
+    color: $orange;
+}
+.new-campaign-btn {
+    position: relative;
+    display: block;
+}
+.new-campaign-btn a {
+    background: linear-gradient(99.26deg, #F63E3E 12.34%, #FFBC3A 190.28%);
+    // border-radius: 100px;
+    border-radius: 10px;
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 10px 40px;
+    border: none;
+    transition: 0.4s;
+}
+.new-campaign-btn a:hover {
+    transform: translateX(15px);
+}
+.campaign-tabs {
+    display: block;
+}
+.campaign-tabs ul {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+.campaign-tabs ul li {
+    display: inline-block;
+}
+.campaign-tabs ul li a {
+    transition: 0.4s;
+    color: #fff;
+}
+.campaign-tabs ul li a:hover  {
+    color: $orange;
+}
+.active-tab {
+    color: $orange !important;
+}
+.view-detail-link {
+    // color: $dark-blue;
+    // font-weight: bold;
+    transition: 0.4s;
+    color: #212529;
+
+}
+.view-detail-link:hover {
+    color: $orange;
+}
+.paid {
+    color: $green;
+}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    background-color: $orange;   
+}
+.offers-list {
+    background: #FFFFFF;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.13);
+    border-radius: 5px;
+    padding: 15px 10px;
+    margin-bottom: 20px;
+}
+.offer-brand-name {
+    margin-top: 15px;
+    display: block;
+    color: $dark-blue;
+}
+.influencer-categories-para {
+    font-size: 10px;
+    padding: 0 2px;
+    text-align: left;
+}
+.influencer-categories-para span {
+    @extend .ellipsis;
+}
+.influencer-categories-para span::after {
+    content: '.';
+    position: relative;
+    padding-right: 5px;
+  }
+  .project-name-box {
+    background: #FFFFFF;
+    box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.16);
+    border-radius: 10px;
+    transition: 0.4s;
+    margin: 0 15px 15px 0;
+    padding: 30px 20px;
+  }
+  .project-name-box p {
+      margin-bottom: 0;
+  }
+  .project-name-box h3, .project-detail-box h3, .top-influencers-box h3 {
+    font-weight: 600;
+    font-size: 20px;
+    color: #545151;
+    margin-bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline;
+  }
+  .project-detail-box, .top-influencers-box {
+    background: #FFFFFF;
+    box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.16);
+    border-radius: 10px;
+    transition: 0.4s;
+    margin: 0 15px 15px 0;
+    padding: 30px 20px;
+    min-height: 750px;
+  }
+  .edit-icon-project-detail {
+      float: right;
+  }
+  .svg-icons {
+    display: inline-block;
+    width: 20px;
+    margin-right: 10px;
+  }
+  .svg-icons img {
+      width: 20px;
+  }
+  .age-group-seperator {
+    padding: 0 5px;
+    }
+
+    .medium-div {
+        margin-bottom: 15px;
+        @extend .ellipsis;
+    }
+
+    .medium-div span::after, .influencer-categories-span span::after{
+        content: '.';
+        position: relative;
+        padding-right: 5px;
+    }
+    .matching-influencers-bg {
+        position: fixed;
+        width: 640px;
+        top: 100px;
+        left: 400px;
+        // background-image: url("../images/matching-influencers-bg.png");
+        background-repeat: no-repeat;
+        height: 560px;
+        background-position: 100%;
+        background-size: cover;
+    }
+
+    .social-media-box{
+    box-shadow: -2px 14px 30px rgba(0, 0, 0, 0.18);
+    padding: 20px 20px 20px 20px  ; 
+    border-radius: 10px;   
+    margin-bottom: 20px;
+    transition: .3s;
+    
+    }
+
+    
+ 
+
+.social-media-box:hover {
+    transform: translateY(-15px);
+}
+
+
+.social-media-icons{
+    width: 51px;
+    height: 51px;
+}
+    .margin-right-5{
+        margin-right: 5px;
+    }
+
+    .no-padding-tab-link{
+        padding:0.5rem 0rem;
+    }
+
+
+    .social-media-box img{
+        margin: 0 auto;
+    }
+.social-media-insights{
+    margin: 0 auto;
+    color: #374254;
+
+}
+    .influencer-categories-span {
+        @extend .ellipsis
+    }
+    .influencer-categories-span span {
+        font-size: 10px;
+    }
+    .top-influencer-card {
+        border-radius: 10px;
+        margin-top: 15px;
+        padding-bottom: 20px;
+    }
+    .ambassador-bg {
+        background-color: $ambassador;
+    }
+    .gold-bg {
+        background-color: $gold;
+    }
+    .silver-bg {
+        background-color: $silver;
+    }
+    .ambassador-heading {
+        font-size: 18px;
+        font-weight: bold;
+        color: #fff;
+        margin-top: 15px;
+        margin-bottom: 0;
+    }
+
+    .top-influencers-profile-pic, .top-influencers-profile-pic img {
+        width: 50px;
+        height: 50px;
+    }
+    .top-influencers-profile-pic img {
+        border-radius: 25px;
+        border: 2px solid #e5e5e5;
+    }
+    .top-influencers-name, .top-influencers-category {
+        color: #fff;
+        margin-bottom: 0;
+        @extend .ellipsis;
+    }
+    .col-seperator::after {
+        content: '';
+        top: 0;
+        width: 1px;
+        height: 40px;
+        background-color: #fff;
+        position: absolute;
+        right: 0;
+    }
+    
+    .influencer-checkbox label:before {
+        top: 20px;
+    }
+    .influencer-checkbox input:checked + label:after {
+        top: 25px;
+    }
+    .selected-influencers-box {
+        width: 100%;
+        margin: 15px 0 0 0;
+    }
+    .second-menu {
+        border-top: 1px solid #e5e5e5;
+        display: none;
+        text-align: right;
+    }
+    .create-offer-btn {
+        background-color: $green;
+        color: #fff;
+        padding: 10px 25px;
+        border-radius: 6px;
+        transition: 0.4s;
+        border: 1px solid $green;
+    }
+    .create-offer-btn:hover {
+        border: 1px solid $green;
+        color: $green;
+        background-color: transparent;
+    }
+    .influencer-detail-image {
+        width: 150px;
+        height: 150px;
+        margin: 0 auto;
+    }
+    .influencer-detail-image img {
+        width: 150px;
+        height: 150px;
+        border-radius: 100%;
+    }
+    .influencer-detail-name {
+        font-size: 24px;
+        font-weight: bold;
+        color: $dark-grey;
+        margin-bottom: 5px;
+        margin-top: 50px;
+    }
+    .influencer-detail-category {
+        font-size: 14px;
+        padding: 0 2px;
+        text-align: left;
+        margin-bottom: 0px;
+    }
+    .influencer-detail-category span::after {
+        content: '.';
+        position: relative;
+        padding-right: 5px;
+    }
+    .Feed {
+        margin: auto;
+        padding: 1% 1%;
+    }
+    .Feed a {
+        display: inline-block;
+        margin: 1% 1%;
+        width: 23%;
+        line-height: 0;
+    }
+    .Feed a img {
+        animation: fadein 3s;
+        width: 100%;
+    }
+    .instagram-feed {
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        margin: auto;
+        flex-wrap: inherit;
+    }
+    .instagram-feed a {
+        background: #FFFFFF;
+        box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.16);
+        border-radius: 10px;
+        width: 300px;
+        text-align: center;
+        transition: 0.4s;
+        margin: 0 15px 15px 0;
+    }
+    .instagram-feed a img {
+        width: 100%;
+    }
+    .offer-influencer-box {
+        width: 100%;
+        padding-top: 15px;
+    }
+    .project-detail-boxes {
+        min-height: 115px;
+    }
+    .project-detail-boxes h3 {
+        min-height: auto;
+    }
+    .project-detail-boxes h2 {
+        font-size: 16px;
+    }
+    .influencer-price-box {
+        background: $orange;
+        color: #fff;
+        padding: 4px;
+        margin-top: 4px;
+        font-size: 12px;
+        border-radius: 6px;
+        float: left;
+        font-weight: 600;
+    }
+    .ambassador-width {
+        width: 31%;
+        margin: 0 15px 15px 0;
+    }
+
+    .profile-data{
+        padding:1px 10px;
+        background-color:$white;
+    }
+
+    .project-data-tabs ul li a{
+    color: black;
+    }
+
+    .nav-project-detail .nav-link.active, .nav-project-details-pills .show > .nav-link {
+        background-color: $white ;
+        border-bottom:3px solid  $orange;
+       color: black; 
+       
+    }
+
+    .project-detail-tabs ul li a{
+        color:black;
+        transition: -0.6s ;
+       font-weight: bold;
+    }
+
+    .profile-detail{
+        background-color: $white;
+        box-shadow: 0px 4px 12px #00000029;
+        border-radius: 10px;
+        padding: 20px;
+        
+
+    }
+    .profile-data li {
+        padding:14px;
+    }
+
+    .project-name{
+        font-size: 16px;
+        font-weight: bold;
+        // margin-right: 20px;
+    }
+.project-url{
+    margin-top: -20px;
+    font-size: 12px;
+    color: #BABABA;
+    // margin-right: 20px;
+    padding-bottom: 10px;
+}
+
+.influencer-box:hover{
+    transform: translateZ(15px);
+
+}
+
+.prod-tabs td, .prod-tabs th{
+    padding: 9px;
+}
+
+.dropdown-icon{
+    
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAL5JREFUSA1jYBgFoyEwGgI0DwFGfDYkp6RuBcrzc3FyBE6ePPk1strc3FzRb99/rAeKfZw7Z7Y3shwymwmZg4XN/5+Bwfrbjx/7QQbC5MGGA8VAckAxfpg4NpoFmyBMDORykOH//zNoQy1xBMnBxBgZGa5ycXAEwtRjo/EGEUgD3LVAS0AGgsRAFkINd0QPOpA8MiBoAUgxsiUgPrGGg9WCCGJARkaG2O8/f9eB1GKLdGLMGFUzGgKjIUCjEAAA5/5NFpOU2xMAAAAASUVORK5CYII=);
+    background-position: 96% 60%;
+    background-repeat: no-repeat;
+    -webkit-appearance: none;
+}
+
+.BE-cancel-btn a{
+    background:$white;
+    border:1px solid $orange;
+    color: black;
+}
+    @media screen and (min-width: 992px) and (max-width: 1200px) 
+  {
+    .dashboard-flonzo-logo {
+        width: 100%;
+        height: 64px;
+        padding-top: 10px;
+    }
+    .dashboard-flonzo-logo img {
+        width: 95%;
+    }
+    .dashboard-box-4 h3 {
+        font-size: 14px;
+    }
+    .post-insight-box h4, .post-insight-box h3 {
+        font-size: 12px;
+    }
+    .dashboard-product-img , .dashboard-product-img img {
+        width: 100%;
+    }
+    .product-images {
+        width: 100%;
+        height: auto;
+    }
+    .user-profile-box h3, .product-box h3 {
+        font-size: 14px;
+    }
+    .project-name-box h3, .project-detail-box h3, .top-influencers-box h3 {
+        font-size: 15px;
+    }
+    .ambassador-heading {
+        font-size: 14px;
+        margin-top: 5px;
+    }
+    .top-influencers-profile-pic, .top-influencers-profile-pic img {
+        width: 100%;
+        height: auto;
+    }
+    .top-influencers-name, .top-influencers-category {
+        font-size: 11px;
+    }
+    .influencer-image, .influencer-image img {
+        // width: 100%;
+        margin-top: 10px;
+    }
+  }
+
+
+
+@media screen and (min-width: 769px) and (max-width: 991px) 
+  {
+      
+    .mobile-center{
+        text-align: center;
+        margin: 0 auto;
+    }
+    .offer-brand-name {
+        text-align: center;
+    }
+    .dashboard-box-4 {
+        margin-bottom: 15px;
+    }
+    .dashboard-left-panel {
+        display: none;
+    }
+    .dashboard-right-panel {
+        max-width: 100%;
+        flex: auto;
+    }
+    .second-menu {
+        display: block;
+    }
+    .post-insight-box {
+        margin-bottom: 15px;
+    }
+    .dashboard-product-img {
+        margin-bottom: 15px;
+    }
+    .influencer-categories-para {
+        text-align: center;
+    }
+    .influencer-categories-para, .top-influencers-name, .top-influencers-category {
+        text-align: center;
+    }
+    .influencer-detail-name {
+        text-align: center;
+    }
+    .influencer-detail-category {
+        text-align: center;
+    }
+    
+  }
+@media screen and (min-width: 641px) and (max-width: 768px) 
+  {
+      
+    .mobile-center{
+        text-align: center;
+        margin: 0 auto;
+    }
+    .offer-brand-name {
+        text-align: center;
+    }
+    .dashboard-box-4 {
+        margin-bottom: 15px;
+    }
+    .dashboard-left-panel {
+        display: none;
+    }
+    .dashboard-right-panel {
+        max-width: 100%;
+        flex: auto;
+    }
+    .second-menu {
+        display: block;
+    }
+    .post-insight-box {
+        margin-bottom: 15px;
+    }
+    .dashboard-product-img {
+        margin-bottom: 15px;
+    }
+    .dashboard-product-categories {
+        width: 100%;
+        margin: 0 0 15px 0;
+    }
+    .project-name-box {
+        margin: 0 0 15px 0;
+    }
+    .project-detail-box, .top-influencers-box {
+        margin: 0 0 15px 0;
+    }
+    .influencer-categories-para {
+        text-align: center;
+    }
+    .influencer-categories-para, .top-influencers-name, .top-influencers-category {
+        text-align: center;
+    }
+    .influencer-box h3 {
+        font-size: 18px;
+        text-align: center;  
+    }
+    .influencer-detail-name {
+        text-align: center;
+    }
+    .influencer-detail-category {
+        text-align: center;
+    }
+    .create-offer-btn {
+        width: 100%;
+        display: block;
+        text-align: center;
+    }
+    .influencer-price-box {
+        float: none;
+    }
+  }
+@media screen and (min-width: 481px) and (max-width: 640px) 
+  {
+      
+    .mobile-center{
+        text-align: center;
+        margin: 0 auto;
+    }
+    .offer-brand-name {
+        text-align: center;
+    }
+    .dashboard-box-4 {
+        margin-bottom: 15px;
+    }
+    .dashboard-left-panel {
+        display: none;
+    }
+    .dashboard-right-panel {
+        max-width: 100%;
+        flex: auto;
+    }
+    .second-menu {
+        display: block;
+    }
+    .post-insight-box {
+        margin-bottom: 15px;
+    }
+    .dashboard-product-img {
+        margin-bottom: 15px;
+    }
+    .dashboard-product-categories {
+        width: 100%;
+        margin: 0 0 15px 0;
+    }
+    .project-name-box {
+        margin: 0 0 15px 0;
+    }
+    .project-detail-box, .top-influencers-box {
+        margin: 0 0 15px 0;
+    }
+    .influencer-categories-para {
+        text-align: center;
+    }
+    .influencer-categories-para, .top-influencers-name, .top-influencers-category {
+        text-align: center;
+    }
+    .influencer-box h3 {
+        font-size: 18px;
+        text-align: center;  
+    }
+    .influencer-detail-name {
+        text-align: center;
+    }
+    .influencer-detail-category {
+        text-align: center;
+    }
+    .create-offer-btn {
+        width: 100%;
+        display: block;
+        text-align: center;
+    }
+    .influencer-price-box {
+        float: none;
+    }
+    
+  }
+@media screen and (min-width: 320px) and (max-width: 480px) 
+  {
+
+    .mobile-center{
+        text-align: center;
+        margin: 0 auto;
+    }
+    .offer-brand-name {
+        text-align: center;
+    }
+    .dashboard-box-4 {
+        margin-bottom: 15px;
+    }
+    .influencer-image, .influencer-image img {
+        width: 100%;
+    }
+    .influencer-box h3 {
+        font-size: 18px;
+        text-align: center;
+        
+    }
+    .dashboard-left-panel {
+        display: none;
+    }
+    .dashboard-right-panel {
+        max-width: 100%;
+        flex: auto;
+    }
+    .second-menu {
+        display: block;
+    }
+    .post-insight-box {
+        margin-bottom: 15px;
+    }
+    .dashboard-product-img {
+        margin-bottom: 15px;
+    }
+    .dashboard-product-categories {
+        width: 100%;
+        margin: 0 0 15px 0;
+    }
+    .project-name-box {
+        margin: 0 0 15px 0;
+    }
+    .project-detail-box, .top-influencers-box {
+        margin: 0 0 15px 0;
+    }
+    .product-images {
+        width: 100%;
+        height: auto;
+    }
+    .influencer-categories-para, .top-influencers-name, .top-influencers-category {
+        text-align: center;
+    }
+    .influencer-detail-name {
+        text-align: center;
+    }
+    .influencer-detail-category {
+        text-align: center;
+    }
+    .create-offer-btn {
+        width: 100%;
+        display: block;
+        text-align: center;
+    }
+    .offer-influencer-box h3 {
+        text-align: center;
+    }
+    .influencer-price-box {
+        float: none;
+    }
+    .ambassador-width {
+        width: 100%;
+        margin: 0 0 15px 0;
+    }
+  }
+
+

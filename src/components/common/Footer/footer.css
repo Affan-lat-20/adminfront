@@ -1,0 +1,30 @@
+:root {
+    --brand-bg-color: #042446;
+  }
+   
+  .footer {
+    background-color: #000e1d;
+    color: white;
+    text-align: center;
+    height: 3.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0; */
+    /* position: fixed; */
+    width: 100%;
+    bottom: 0;
+  }
+  .footer p {
+    margin: 0;
+  }
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
+
+.mobile-margin-top-20{
+
+}
+  }
+

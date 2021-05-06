@@ -1,0 +1,135 @@
+$orange: #F6413E;
+$dark-blue: #042446;
+.signin-heading {
+    font-weight: bold;
+    font-size: 35px;
+    line-height: 43px;
+    color: #081E35;
+    text-align: center;
+}
+.forget-heading{
+    font-weight: bold;
+    font-size: 28px;
+    line-height: 43px;
+    color: #081E35;
+    text-align: center;
+
+}
+.signin-bg{
+    position: absolute;
+    width: 269px;
+    top: 50px;
+    right: 0;
+    background-image: url("../../../../assets/images/signin-bg.png");
+    background-repeat: no-repeat;
+    height: 500px;
+    background-position: 100%;
+    background-size: contain;
+    transition: 0.4s;
+    z-index: 1;
+}
+.signin-bg:hover {
+    transform: translateY(-15px);
+}
+.sign-in-box {
+    // margin: 0 auto;
+    margin: 50px auto 100px auto;
+    width: 700px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.18);
+    border-radius: 20px;
+    padding: 100px 20px;
+    transition: 0.4s;
+}
+.sign-in-box .animated {
+    animation: up-down 2s ease-in-out infinite alternate-reverse both;
+}
+.sign-in-box:hover {
+    // transform: translateY(15px);
+}
+.forget-password-box {
+    margin: 0 auto;
+    width: 600px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.18);
+    border-radius: 20px;
+    padding: 70px 50px;
+    transition: 0.4s;
+}
+.forgot-password {
+    text-align: right;
+}
+.forgot-password a {
+    font-size: 15px;
+    color: #A69999;
+    transition: 0.4s;
+}
+.forgot-password a:hover {
+    color: $orange;
+    text-decoration: none;
+}
+.create-account {
+    text-align: center;
+}
+.create-account a {
+    color: $orange;
+    transition: 0.4s;
+}
+.create-account a:hover {
+    color: $dark-blue;
+    text-decoration: none;
+}
+.line-seperator {
+    width: 100%;
+    height: 1px;
+    background: #D1C9C9;
+    margin-top: 10px;
+}
+
+@media screen and (min-width: 769px) and (max-width: 991px) 
+  {
+    .sign-in-box , .forget-password-box{
+        width: 100%;
+    }
+    .mobile-hide {
+       
+        display: none;
+    }
+    .signin-bg {
+        display: none;
+    }
+  }
+
+@media screen and (min-width: 641px) and (max-width: 768px) 
+  {
+    .sign-in-box, .forget-password-box {
+        width: 100%;
+        padding: 40px  20px ;
+    }
+    .signin-bg {
+        display: none;
+    }
+  }
+
+@media screen and (min-width: 481px) and (max-width: 640px) 
+  {
+    .sign-in-box , .forget-password-box{
+        width: 100%;
+        padding: 40px 20px;
+    }
+    .signin-bg {
+        display: none;
+    }
+  }
+
+@media screen and (min-width: 320px) and (max-width: 480px) 
+  {
+    .sign-in-box, .forget-password-box {
+        width: 100%;
+        padding: 40px 20px;
+    }
+    .signin-bg {
+        display: none;
+    }
+    
+  }
