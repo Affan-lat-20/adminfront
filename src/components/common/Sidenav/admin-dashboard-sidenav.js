@@ -23,19 +23,16 @@ export default class adminDashboardSidenav extends Component {
     }
 
     sendGetRequest = async () => {
-        const details={
-            
-                "email":"masterwasiq@gmail.com",
-                "password":"123456",
-                "_id":"608fd190439015444c09d3ab",
-                "module":"Usermanagement"
-                
-            
-        }
-            console.log(typeof details)
-             try { const resp = await axios.post('http://localhost:5000/api/user/login',details);
-              console.log(resp); } 
-             catch (err) { // Handle Error Here console.error(err); } }; sendGetRequest();
+            const data= localStorage.getItem("adminToken");
+            console.log(data._id)
+
+            // console.log(typeof details)
+             try { const resp = await axios.get('https://adminop.herokuapp.com/api/user/608fd190439015444c09d3ab/userlist/Usermanagement');
+              console.log(resp);
+             } 
+             catch (err) { 
+                console.log(err);
+
     }
 }
 componentDidMount(){

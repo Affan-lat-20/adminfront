@@ -18,7 +18,7 @@ import GoIcon from "../../../../../assets/images/back-btn.png";
 import { motion } from "framer-motion";
 
 
-export default class registrationRequests extends Component {
+export default class userManagement extends Component {
   render() {
     let adminToken = localStorage.getItem("adminToken");
     adminToken = JSON.parse(adminToken);
