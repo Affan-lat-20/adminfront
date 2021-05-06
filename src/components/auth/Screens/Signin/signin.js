@@ -97,40 +97,20 @@ class signin extends Component {
         password: this.state.password,
       };
       this.handleSpinner()
-      axios.post("https://dev.flonzo.acspropel.com/flonzo/login", loginDetails)
+      axios.post("https://adminop.herokuapp.com/api/user/login", loginDetails)
         .then((response) => {
           // acs response
+          console.log(response);
           if(response.status !== 200 || response.data === "ERROR"){
             throw Error(`Could not process request`)
           }
-
-
-          // collabration signin
-
-          const loginCollab = async()=>{
-            console.log(loginDetails)
-
-            try {
-              const resp = await axios.post("https://collaboration.lathransoft.com/api/login",loginDetails)
-              const url = resp.data.collaborationUrl
-              localStorage.setItem("collabToken", url);
-              console.log(resp);
-           
-
-            } catch (err) {
-              // Handle Error Here
-             console.log(err)
-            }
-          }
-
-          // loginCollab();
 
           const data = response.data;
           console.log(data);
 
        
-        if((data.email_match && data.password_match) && data.site_admin === true){
-          localStorage.setItem("adminToken", JSON.stringify(data));
+        if(response.status===200){
+          localStorage.setItem("Token", JSON.stringify(data));
         setTimeout(() => {
           this.setState({
             isAdminLoggedIn:true,
@@ -139,36 +119,8 @@ class signin extends Component {
         }, 1000);
         
      
-      }else{
-        this.setState({
-          isAdminLoggedIn:false,
-          loading:false,
-          validationMessage: "Invalid Account.",
-          
-        });
-
       }
-      if((data.email_match && data.password_match === false) ){
-          this.setState({
-            validationMessage: "Incorrect password.",
-            loading:false
-          });
-        }
-        if( (data.email_match === false )  ){
-          this.setState({
-            validationMessage: "Invalid email.",
-            loading:false
-          });
-        }
-          // else{
-          //   this.setState({
-          //     validationMessage: "Invalid email or password.",
-          //     loading:false,
-          //     password: "",
-          //   });
-
-          // }
-
+       
         })
         .catch((err) => {
           console.log(err);
@@ -178,11 +130,6 @@ class signin extends Component {
                 password: "",
               });
         
-          
-          // this.setState({
-          //   validationMessage: "Invalid email or password.",
-          //   password: "",
-          // });
         });
       const state = this.state;
       // this.props.history.push('/brand-dashboard', state)
@@ -196,10 +143,10 @@ class signin extends Component {
     let tokenInf = localStorage.getItem("infToken");
     tokenInf = JSON.parse(tokenInf);
 
-    let adminToken = localStorage.getItem("adminToken");
-    adminToken = JSON.parse(adminToken);
+    let Token = localStorage.getItem("Token");
+    Token = JSON.parse(Token);
 
-    if (adminToken !== null) {
+    if (Token !== null) {
       return (
         <Redirect
           to={{
