@@ -100,8 +100,10 @@ class signin extends Component {
       axios.post("https://adminop.herokuapp.com/api/user/login", loginDetails)
       .then(response=>{
         console.log(response)
+        const res=response.data;
+        console.log(res)
         if(response.status==200){
-          localStorage.setItem("Token", response.data);
+          localStorage.setItem("token",JSON.stringify(res));
           this.setState({isAdminLoggedIn:true,
           loading:false})
         }
@@ -115,10 +117,10 @@ class signin extends Component {
   render() {
    
 
-    let Token = localStorage.getItem("Token");
-    Token = JSON.parse(Token);
+    let token = localStorage.getItem("token");
+    token = JSON.parse(token);
 
-    if (Token !== null) {
+    if (token !== null) {
       return (
         <Redirect
           to={{
