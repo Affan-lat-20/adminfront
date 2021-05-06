@@ -16,7 +16,8 @@ import "../../../../../App.scss";
 import { Redirect, Link } from "react-router-dom";
 import GoIcon from "../../../../../assets/images/back-btn.png";
 import { motion } from "framer-motion";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {  faEdit,faTrash  } from "@fortawesome/free-solid-svg-icons";
 
 export default class userManagement extends Component {
   render() {
@@ -50,9 +51,44 @@ export default class userManagement extends Component {
               <AdminDashboardHeader />
               {/* <BrandDashboardSecondMenu /> */}
               <Container>
-
+                <Row className="margin-top-50">
+                  <Col lg={12}>
+                    <div className="new-campaign-btn text-right">
+                      <Link to="#">Add User</Link>
+                    </div>
+                  </Col>
+                </Row>
               </Container>
-              
+
+              <Container>
+                <Row className="margin-vertical-30">
+                  <Col lg={12}>
+                    <Table
+                      responsive
+                      striped
+                      bordered
+                      hover
+                      className="text-left"
+                    >
+                      <thead>
+                        <tr className="table borderless">
+                          <th>User</th>
+                          <th>Edit</th>
+                          <th>Delete</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>affan@lathran.com</td>
+                          <td> <FontAwesomeIcon icon={faEdit}/></td>
+                          <td><FontAwesomeIcon icon={faTrash}/></td>
+                        </tr>
+                      </tbody>
+                    </Table>
+                  </Col>
+                </Row>
+              </Container>
+
               <Footer />
             </Col>
           </Row>
