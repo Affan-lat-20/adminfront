@@ -18,26 +18,50 @@ export default class adminDashboardSidenav extends Component {
     constructor(){
         super()
         this.state={
+            IsresponseUsermanagement:false,
+            IsrespopnseRolemanagement:false
 
         }
     }
 
     sendGetRequest = async () => {
-            const data= localStorage.getItem("adminToken");
+            let data= localStorage.getItem("adminToken");
+            data= JSON.parse(data)
             console.log(data._id)
 
             // console.log(typeof details)
-             try { const resp = await axios.get('https://adminop.herokuapp.com/api/user/608fd190439015444c09d3ab/userlist/Usermanagement');
+             try { const resp = await axios.get(`https://adminop.herokuapp.com/api/user/${data._id}/userlist/Usermanagement`);
               console.log(resp);
+              this.setState({
+                  IsresponseUsermanagement:true
+              })
              } 
              catch (err) { 
                 console.log(err);
 
     }
 }
+    sendroleRequest = async () => {
+    let roledata= localStorage.getItem("adminToken");
+    roledata= JSON.parse(roledata)
+    console.log(roledata._id)
+
+    // console.log(typeof details)
+     try { const resp = await axios.get(`https://adminop.herokuapp.com/api/user/${roledata._id}/rolemanagment/Rolemanagement`);
+      console.log(resp);
+      this.setState({
+        IsrespopnseRolemanagement:true
+      })
+     } 
+     catch (err) { 
+        console.log(err);
+
+}
+}
 componentDidMount(){
 
     this.sendGetRequest();
+    this.sendroleRequest();
 
 }
     render() {
@@ -46,23 +70,25 @@ componentDidMount(){
                                 <div className="dashboard-flonzo-logo">
                                     <img src={FlonzoLogo}></img>
                                 </div>
-                                {/* <div className="dashboard-brand-profile">
-                                    <div className="dashboard-brand-profile-image">
-                                        <img src={StimulusLogo}></img>
-                                    </div>
-                                    <div className="dashboard-brand-profile-heading">Stimulus Production</div>
-                                </div> */}
+                              
                                 <div className="dashboard-side-navbar margin-top-50">
                                     <Nav>
                                         <Nav.Link href="../dashboard">
                                             <span className="dashboard-link-icon"><FontAwesomeIcon icon={faTachometerAlt} /></span>Dashboard
                                         </Nav.Link>
+                                        {this.state.IsresponseUsermanagement?
                                         <Nav.Link href="../user-management">
-                                            <span className="dashboard-link-icon"><FontAwesomeIcon icon={faUserPlus} /></span>User Management
-                                        </Nav.Link>
+                                        <span className="dashboard-link-icon"><FontAwesomeIcon icon={faUserPlus} /></span>User Management
+                                    </Nav.Link>
+                                        
+                                        :null}
+                                        
+                                        {this.state.IsrespopnseRolemanagement?
                                         <Nav.Link href="../role-management">
-                                            <span className="dashboard-link-icon"><FontAwesomeIcon icon={faUsers} /></span>Role Management
+                                        <span className="dashboard-link-icon"><FontAwesomeIcon icon={faUsers} /></span>Role Management
                                         </Nav.Link>
+                                        :null}
+                                        
                                         <Nav.Link href="../logs">
                                             <span className="dashboard-link-icon"><FontAwesomeIcon icon={faCoins} /></span>Logs
                                         </Nav.Link>
