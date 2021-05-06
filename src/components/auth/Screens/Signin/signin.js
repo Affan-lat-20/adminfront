@@ -98,50 +98,22 @@ class signin extends Component {
       };
       this.handleSpinner()
       axios.post("https://adminop.herokuapp.com/api/user/login", loginDetails)
-        .then((response) => {
-          // acs response
-          console.log(response);
-          if(response.status !== 200 || response.data === "ERROR"){
-            throw Error(`Could not process request`)
-          }
-
-          const data = response.data;
-          console.log(data);
-
-       
-        if(response.status===200){
-          localStorage.setItem("Token", JSON.stringify(data));
-        setTimeout(() => {
-          this.setState({
-            isAdminLoggedIn:true,
-            loading:false,
-          });
-        }, 1000);
-        
-     
-      }
-       
-        })
-        .catch((err) => {
-          console.log(err);
-          this.setState({
-                validationMessage: "Unable to connect, Pls try again.",
-                loading:false,
-                password: "",
-              });
-        
-        });
-      const state = this.state;
-      // this.props.history.push('/brand-dashboard', state)
+      .then(response=>{
+        console.log(response)
+        if(response.status==200){
+          localStorage.setItem("Token", response.data);
+          this.setState({isAdminLoggedIn:true,
+          loading:false})
+        }
+      })
+      .catch(error=>{
+        console.log(error)
+      })
     }
   };
 
   render() {
-    let token = localStorage.getItem("token");
-    token = JSON.parse(token);
-
-    let tokenInf = localStorage.getItem("infToken");
-    tokenInf = JSON.parse(tokenInf);
+   
 
     let Token = localStorage.getItem("Token");
     Token = JSON.parse(Token);
