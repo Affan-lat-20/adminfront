@@ -15,6 +15,13 @@ $dark-blue: #042446;
     text-align: center;
 
 }
+.validation-error {
+    text-align: start;
+    font-size: 12px;
+    padding: 0px 5px;
+    color:$orange;
+    margin: 12px;
+  }
 .signin-bg{
     position: absolute;
     width: 269px;

@@ -21,15 +21,13 @@ import {
   faTimesCircle,
 } from "@fortawesome/free-solid-svg-icons";
 
-export default function Influencerproposalcompletedpopup(props) {
+export default function Popup(props) {
   const [show, setShow] = useState(true);
   console.log(props);
 
   return (
     <>
-      {/* <Button variant="primary" className='submit-btn hover-white' onClick={() => setShow(true)}>
-                Send Proposal
-      </Button> */}
+   
 
       <Modal
         show={show}

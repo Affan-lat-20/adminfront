@@ -9,8 +9,7 @@ import ScheduleMeeting from './components/auth/Components/GetStarted/schedule-me
 import Signin from './components/auth/Screens/Signin/signin';
 import ForgetPassword from './components/auth/Screens/ForgetPassword/forget-password';
 import ResetPassword from './components/auth/Screens/ForgetPassword/reset-password';
-import SignUpBrand from "./components/auth/Screens/Signup/signup-brand";
-import SignUpInfluencer from "./components/auth/Screens/Signup/signup-influencer";
+
 import ComingSoon from "./components/common/ComingSoon/Screens/coming-soon";
 
 // Operations
@@ -18,6 +17,7 @@ import OperationsDashboard from './components/main/Operations/Dashboard/dashboar
 import UserManagement from './components/main/Operations/UserManagement/Screens/user-management';
 import RoleManagement from './components/main/Operations/RoleManagement/Screens/role-management';
 import Logs from "./components/main/Operations/Logs/Screens/logs";
+import AddUser from "./components/main/Operations/UserManagement/Components/addUser";
 
 
 
@@ -44,6 +44,10 @@ function App() {
         <Route exact path='/user-management' component={UserManagement}></Route>
         <Route exact path='/role-management' component={RoleManagement}></Route>
         <Route exact path='/logs' component={Logs}></Route>
+        <Route exact path='/addUser' component={AddUser}></Route>
+
+
+
         <Route component={PageNotFound}/>
       </Switch>
     </Router>

@@ -20,6 +20,22 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {  faEdit,faTrash  } from "@fortawesome/free-solid-svg-icons";
 
 export default class userManagement extends Component {
+  constructor(){
+    super()
+    this.state={
+
+    }
+  }
+
+
+  editUser = () =>{
+    alert("USER EDIT")
+  }
+
+
+  deleteUser = () =>{
+    alert("Delete USER")
+  }
   render() {
     let adminToken = localStorage.getItem("adminToken");
     adminToken = JSON.parse(adminToken);
@@ -33,6 +49,9 @@ export default class userManagement extends Component {
         />
       );
     }
+    
+
+
     return (
       <motion.div
         initial={{ opacity: 0.01 }}
@@ -54,7 +73,7 @@ export default class userManagement extends Component {
                 <Row className="margin-top-50">
                   <Col lg={12}>
                     <div className="new-campaign-btn text-right">
-                      <Link to="#">Add User</Link>
+                      <Link to="./addUser">Add User</Link>
                     </div>
                   </Col>
                 </Row>
@@ -80,8 +99,8 @@ export default class userManagement extends Component {
                       <tbody>
                         <tr>
                           <td>affan@lathran.com</td>
-                          <td> <FontAwesomeIcon icon={faEdit}/></td>
-                          <td><FontAwesomeIcon icon={faTrash}/></td>
+                          <td> <FontAwesomeIcon icon={faEdit}  onClick={this.editUser}/></td>
+                          <td><FontAwesomeIcon icon={faTrash} onClick={this.deleteUser}/></td>
                         </tr>
                       </tbody>
                     </Table>
