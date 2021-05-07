@@ -50,8 +50,7 @@ export default function Popup(props) {
                 ></Modal.Title>
               </Col>
               <Col lg={4}>
-                {props.message === "Product has been added." ||
-                props.message === "Product Updated." ? (
+                {props.message === "User has been deleted."? (
                   <FontAwesomeIcon
                     icon={faCheckCircle}
                     size="3x"
@@ -60,14 +59,7 @@ export default function Popup(props) {
                   />
                 ) : null}
 
-                {props.message === "User has been added." ? (
-                  <FontAwesomeIcon
-                    icon={faCheckCircle}
-                    size="3x"
-                    color="green"
-                    className="margin-top-40 margin-left-30 modal-mobile-size"
-                  />
-                ) : null}
+         
                 {props.message === "Error in fetching data. Pls try again" ? (
                   <FontAwesomeIcon
                     icon={faExclamationCircle}
@@ -84,77 +76,7 @@ export default function Popup(props) {
                     className="margin-top-40 margin-left-30 modal-mobile-size"
                   />
                 ) : null}
-                {props.message ===
-                "You can not choose more than one attitude value." ? (
-                  <FontAwesomeIcon
-                    icon={faExclamationCircle}
-                    size="3x"
-                    className="margin-top-40 margin-left-30 modal-mobile-size"
-                  />
-                ) : null}
-                {props.message ===
-                "You can not add more than two personalitiy values." ? (
-                  <FontAwesomeIcon
-                    icon={faExclamationCircle}
-                    size="3x"
-                    className="margin-top-40 margin-left-30 modal-mobile-size"
-                  />
-                ) : null}
-                {props.message ===
-                "You can not choose more than two lifestyle values." ? (
-                  <FontAwesomeIcon
-                    icon={faExclamationCircle}
-                    size="3x"
-                    className="margin-top-40 margin-left-30 modal-mobile-size"
-                  />
-                ) : null}
-                {props.message === "Please select atleast one category." ||
-                props.message === "Error! Please try again." ||
-                props.message === "Unable to fetch categories list." ||
-                props.message === "Cannot upload files more than 4" ||
-                props.message === "Invalid Handle" ? (
-                  <FontAwesomeIcon
-                    icon={faExclamationCircle}
-                    size="3x"
-                    className="margin-top-40 margin-left-30 modal-mobile-size"
-                  />
-                ) : null}
-
-                {props.message === "You have Rejected the Offer." ? (
-                  <FontAwesomeIcon
-                    icon={faTimesCircle}
-                    size="3x"
-                    color="red"
-                    className="margin-top-40 margin-left-30 modal-mobile-size"
-                  />
-                ) : props.message === "You have Accepted the Offer." ||
-                  props.message ===
-                    "Influencers have been pitched sucessfully." ||
-                  props.message === "Profile Updated." ? (
-                  <FontAwesomeIcon
-                    icon={faCheckCircle}
-                    size="3x"
-                    color="green"
-                    className="margin-top-40 margin-left-30 modal-mobile-size"
-                  />
-                ) : props.message ===
-                    "Unable to proceed with your request. Please try again in a while." ||
-                  props.message ===
-                    "Network error. Please try again in a while." ||
-                  props.message === "Email already exists" ||
-                  props.message ===
-                    "Unable to fetch data. Please try again in a while." ||
-                  props.message === "Email Already Exists." ||
-                  props.message === "You have acceeded the budget limit." ||
-                  props.message === "Please select influencers." ||
-                  props.message ===
-                    "You can not choose more than one activity values." ? (
-                  <FontAwesomeIcon
-                    icon={faExclamationCircle}
-                    size="3x"
-                    className="margin-top-40 margin-left-30 modal-mobile-size"
-                  />
-                ) : null}
+         
               </Col>
             </Modal.Header>
           </Col>

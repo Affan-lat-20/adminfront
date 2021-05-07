@@ -19,6 +19,8 @@ import GoIcon from "../../../../../assets/images/back-btn.png";
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {  faEdit,faTrash  } from "@fortawesome/free-solid-svg-icons";
+import Alert from "../../../../common/Popup/popup";
+import "./usermanagement.css"
 
 export default class userManagement extends Component {
   constructor(){
@@ -26,6 +28,11 @@ export default class userManagement extends Component {
     this.state={
       IsresponseUsermanagementadd:false,
       users:[],
+      isEdit:false,
+      isDelete:false,
+      isUserDeleted:false,
+      isUserDeletedErr:false
+
 
     }
   }
@@ -62,19 +69,63 @@ export default class userManagement extends Component {
   }
 };
 
+showEdit = async () => {
+  let data= localStorage.getItem("adminToken");
+  data= JSON.parse(data)
+  console.log(data._id)
+  try {
+      const resp = await axios.get(`https://adminop.herokuapp.com/api/user/${data._id}/rolemanagment/Usermanagement/PUT`);
+      if(resp.status === 200){
+        this.setState({...this.state,isEdit:true})
+      }
+  } catch (err) {
+      // Handle Error Here
+      console.error(err);
+  }
+};
+showDelete = async () => {
+  let data= localStorage.getItem("adminToken");
+  data= JSON.parse(data)
+  console.log(data._id)
+  try {
+      const resp = await axios.get(`https://adminop.herokuapp.com/api/user/${data._id}/rolemanagment/Usermanagement/PUT`);
+      console.log("DELETE", resp)
+      if(resp.status === 200){
+        this.setState({...this.state,isDelete:true})
+      }
+  } catch (err) {
+      // Handle Error Here
+    console.log(err)
+  }
+};
+
+
   editUser = () =>{
     alert("USER EDIT")
   }
 
 
-  deleteUser = () =>{
-    alert("Delete USER")
+  deleteUser = (id) =>{
+    axios.delete(`https://adminop.herokuapp.com/api/user/delete/${id}`)
+    .then(res=>{
+      this.setState({...this.state,isUserDeleted:true})
+      this.getUsers()
+
+
+    })
+
   }
+
+  closeAlertModal = () => {
+    this.setState({ ...this.state, isUserDeleted: false , isUserDeletedErr:false});
+  };
 
 
   componentDidMount(){
     this.adduserCheck();
     this.getUsers();
+    this.showEdit()
+    this.showDelete()
 }
   render() {
     let adminToken = localStorage.getItem("adminToken");
@@ -91,7 +142,7 @@ export default class userManagement extends Component {
     }
     
 
-    const {users} = this.state
+    const {users, isDelete, isEdit} = this.state
     return (
       <motion.div
         initial={{ opacity: 0.01 }}
@@ -99,6 +150,9 @@ export default class userManagement extends Component {
         transition={{ delay: 0.1, duration: 1 }}
       >
         <Container fluid>
+        {this.state.isUserDeleted ? (<Alert message="User has been deleted." closeAlertModal={this.closeAlertModal}/>) : null}
+        {this.state.isUserDeletedErr ? (<Alert message="Error! Please try again a while." closeAlertModal={this.closeAlertModal}/>) : null}
+
           <Row>
             <Col xs={2} className="no-padding-horizontal dashboard-left-panel">
               <SideNav />
@@ -122,6 +176,7 @@ export default class userManagement extends Component {
               <Container>
                 <Row className="margin-vertical-30">
                   <Col lg={12}>
+                    
                     <Table
                       responsive
                       striped
@@ -129,27 +184,32 @@ export default class userManagement extends Component {
                       hover
                       className="text-left"
                     >
-                      <thead>
-                        <tr className="table borderless">
-                          <th>User Name</th>
-                          <th>User Email</th>
-                          <th>User Role</th>
-                          <th>Edit</th>
-                          <th>Delete</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {this.state.users.map(user=>(
-                          <tr key={user._id}>
-                          <td>{`${user.firstName} ${user.lastName}`}</td>
-                          <td>{user.email}</td>
-                          <td>{user.userRole}</td>
-                          <td> <FontAwesomeIcon icon={faEdit}  onClick={this.editUser}/></td>
-                          <td><FontAwesomeIcon icon={faTrash} onClick={this.deleteUser}/></td>
-                          </tr>
-                        ))}
-                        
-                      </tbody>
+                            <thead>
+                            <tr className="table borderless">
+                              <th>User Name</th>
+                              <th>User Email</th>
+                              <th>User Role</th>
+                              <th>Edit</th>
+                              <th>Delete</th>
+                            </tr>
+                          </thead>
+                      {users.map(user=>(
+                        <>
+                      
+                          <tbody>
+                              <tr key={user._id}>
+                              <td>{`${user.firstName} ${user.lastName}`}</td>
+                              <td>{user.email}</td>
+                              <td>{user.userRole}</td>
+                              {isEdit?<td > <FontAwesomeIcon icon={faEdit}  onClick={() => this.editUser()}/></td>:null}
+                              {isDelete?<td><FontAwesomeIcon icon={faTrash} onClick={()=>this.deleteUser(user._id)}  className="delete-icon"/></td>:null}
+                              </tr>
+                            
+                          </tbody>
+                          </>
+                      
+                      ))}
+                  
                     </Table>
                   </Col>
                 </Row>
