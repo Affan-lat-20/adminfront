@@ -100,11 +100,6 @@ showDelete = async () => {
 };
 
 
-  editUser = () =>{
-    alert("USER EDIT")
-  }
-
-
   deleteUser = (id) =>{
     axios.delete(`https://adminop.herokuapp.com/api/user/delete/${id}`)
     .then(res=>{
@@ -120,7 +115,9 @@ showDelete = async () => {
     this.setState({ ...this.state, isUserDeleted: false , isUserDeletedErr:false});
   };
 
-
+  fetchUpdatedUsers=()=>{
+    this.getUsers()
+  }
   componentDidMount(){
     this.adduserCheck();
     this.getUsers();
@@ -149,7 +146,7 @@ showDelete = async () => {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.1, duration: 1 }}
       >
-        <Container fluid>
+        <Container fluid >
         {this.state.isUserDeleted ? (<Alert message="User has been deleted." closeAlertModal={this.closeAlertModal}/>) : null}
         {this.state.isUserDeletedErr ? (<Alert message="Error! Please try again a while." closeAlertModal={this.closeAlertModal}/>) : null}
 
@@ -192,22 +189,20 @@ showDelete = async () => {
                               <th>Edit</th>
                               <th>Delete</th>
                             </tr>
-                          </thead>
-                      {users.map(user=>(
-                        <>
-                      
-                          <tbody>
-                              <tr key={user._id}>
-                              <td>{`${user.firstName} ${user.lastName}`}</td>
-                              <td>{user.email}</td>
-                              <td>{user.userRole}</td>
-                              {isEdit?<td > <FontAwesomeIcon icon={faEdit}  onClick={() => this.editUser()}/></td>:null}
-                              {isDelete?<td><FontAwesomeIcon icon={faTrash} onClick={()=>this.deleteUser(user._id)}  className="delete-icon"/></td>:null}
-                              </tr>
-                            
-                          </tbody>
-                          </>
-                      
+                            </thead>
+                            {users.map(user=>(
+                              <>
+                              <tbody>
+                                  <tr key={user._id}  className="table borderless">
+                                  <td>{`${user.firstName} ${user.lastName}`}</td>
+                                  <td>{user.email}</td>
+                                  <td>{user.userRole}</td>
+                                  {isEdit?<Link  to={{pathname:"/edit-user",state: { id: user._id , }}}>
+                                  <td className="edit-icon" ><FontAwesomeIcon icon={faEdit} /></td></Link>:null}
+                                  {isDelete?<td><FontAwesomeIcon icon={faTrash} onClick={()=>this.deleteUser(user._id)}  className="delete-icon"/></td>:null}
+                                  </tr>
+                              </tbody>
+                              </>
                       ))}
                   
                     </Table>

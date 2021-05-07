@@ -1,4 +1,10 @@
 .delete-icon{
-    color: red;
+    /* color: red; */
     cursor: pointer;
+}
+.delete-icon :hover, .edit-icon:hover{
+    color: #F6413E;
+}
+.edit-icon{
+    color: #212529;
 }
