@@ -30,7 +30,7 @@ export default class adminDashboardSidenav extends Component {
             console.log(data._id)
 
             // console.log(typeof details)
-             try { const resp = await axios.get(`https://adminop.herokuapp.com/api/user/${data._id}/userlist/Usermanagement`);
+             try { const resp = await axios.get(`https://adminop.herokuapp.com/api/user/${data._id}/rolemanagment/Usermanagement/GET`);
               console.log(resp);
               this.setState({
                   IsresponseUsermanagement:true
@@ -47,7 +47,7 @@ export default class adminDashboardSidenav extends Component {
     console.log(roledata._id)
 
     // console.log(typeof details)
-     try { const resp = await axios.get(`https://adminop.herokuapp.com/api/user/${roledata._id}/rolemanagment/Rolemanagement`);
+     try { const resp = await axios.get(`https://adminop.herokuapp.com/api/user/${roledata._id}/rolemanagment/Rolemanagement/GET`);
       console.log(resp);
       this.setState({
         IsrespopnseRolemanagement:true

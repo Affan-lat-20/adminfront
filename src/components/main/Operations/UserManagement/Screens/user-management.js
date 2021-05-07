@@ -34,7 +34,7 @@ export default class userManagement extends Component {
     console.log(data._id)
 
     // console.log(typeof details)
-     try { const resp = await axios.get(`https://adminop.herokuapp.com/api/user/${data._id}/userlist/Usermanagement`);
+     try { const resp = await axios.get(`https://adminop.herokuapp.com/api/user/${data._id}/rolemanagment/Usermanagement/POST`);
       console.log(resp);
       this.setState({
           IsresponseUsermanagement:true
@@ -55,8 +55,8 @@ export default class userManagement extends Component {
   }
   componentDidMount(){
 
-    this.sendGetRequest();
-    this.sendroleRequest();
+    this.adduserCheck();
+    
 
 }
   render() {
