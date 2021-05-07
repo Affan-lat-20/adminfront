@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -27,7 +28,23 @@ export default class userManagement extends Component {
     }
   }
 
+  adduserCheck = async () => {
+    let data= localStorage.getItem("adminToken");
+    data= JSON.parse(data)
+    console.log(data._id)
 
+    // console.log(typeof details)
+     try { const resp = await axios.get(`https://adminop.herokuapp.com/api/user/${data._id}/userlist/Usermanagement`);
+      console.log(resp);
+      this.setState({
+          IsresponseUsermanagement:true
+      })
+     } 
+     catch (err) { 
+        console.log(err);
+
+}
+}
   editUser = () =>{
     alert("USER EDIT")
   }
@@ -36,6 +53,12 @@ export default class userManagement extends Component {
   deleteUser = () =>{
     alert("Delete USER")
   }
+  componentDidMount(){
+
+    this.sendGetRequest();
+    this.sendroleRequest();
+
+}
   render() {
     let adminToken = localStorage.getItem("adminToken");
     adminToken = JSON.parse(adminToken);
