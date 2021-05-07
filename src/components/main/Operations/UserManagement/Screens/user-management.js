@@ -190,7 +190,7 @@ showDelete = async () => {
                               <th>Delete</th>
                             </tr>
                             </thead>
-                            {users.map(user=>(
+                            {users.reverse().map(user=>(
                               <>
                               <tbody>
                                   <tr key={user._id}  className="table borderless">

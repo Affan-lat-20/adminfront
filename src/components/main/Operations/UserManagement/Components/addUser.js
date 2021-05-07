@@ -35,17 +35,15 @@ class addUser extends Component {
       lastnameError:"",
       employeeEmail: "",
       employeeEmailError: "",
-      employeePhoneNumber: "",
-      employeePhoneNumberError: "",
-      role: "",
+      role: "Roles",
       roleError: "",
       employeePassword: "",
       employeePasswordError: "",
       loading:false,
-      userID:"",
-      isError:false,
-      emailValidationError:false,
-      alertUserAdded:false
+      roleList:"",
+      roleListErr:"",
+      userAddedErr:false
+   
     };
   }
   closeAlertModal =()=>{
@@ -94,16 +92,8 @@ class addUser extends Component {
     ) {
       isError = true;
       errors.employeePasswordError = "This field cannot be left empty.";
-    }else if (!passwordRegex.test(this.state.employeePassword)) {
-      isError = true;
-      errors.employeePasswordError = `Password must be 8 characters long,
-      including a number, capital letter and
-      special character.`
     }
-      if (this.state.employeePhoneNumber === "" || this.state.employeePhoneNumber === null) {
-      isError = true;
-      errors.employeePhoneNumberError = "This field cannot be left empt.";
-    }
+    
     if (this.state.role === "" || this.state.role === null) {
       isError = true;
       errors.roleError = "This field cannot be left empty.";
@@ -119,7 +109,17 @@ class addUser extends Component {
 
   handleSpinner = ()=>{
     this.setState({loading:true})
-  }  
+  }
+  getRoles = async () => {
+
+    try {
+        const resp = await axios.get(`https://adminop.herokuapp.com/api/user/rolename`);
+        console.log("ROLES", resp)
+        this.setState({...this.state, roleList:resp.data})
+    } catch (err) {
+        console.error(err);
+    }
+  };  
 
   handleUserSubmit = (e) => {
     e.preventDefault();
@@ -127,39 +127,39 @@ class addUser extends Component {
     const err = this.validate();
     if (!err) {
       const userDetails = {
-        first_name: this.state.firstname,
-        last_name:this.state.lastname,
+        firstName: this.state.firstname,
+        lastName:this.state.lastname,
+        userRole:this.state.role,
         email: this.state.employeeEmail,
-        phone: this.state.employeePhoneNumber,
         password: this.state.employeePassword
       };
       this.handleSpinner();
+      console.log(userDetails)
   
 
-     const  generateUser = async () => {
-       console.log(userDetails)
-        const res = await axios.post("https://dev.flonzo.acspropel.com/flonzo/core_user", userDetails)
+     const  addeUser = async () => {
+        const res = await axios.post("https://adminop.herokuapp.com/api/user/register", userDetails)
         .then(res=>{
           console.log(res)
-        this.props.history.push("/user-management")
-
-      
-     
+          this.props.history.push("/user-management")
         })
         .catch(err=>{
-          this.setState({...this.state,isError:true, loading:false})
+          this.setState({...this.state,userAddedErr:true, loading:false})
         })
     };
-    generateUser();
+    addeUser();
 
 
     }
   };
+  componentDidMount(){
+    this.getRoles();
+  }
   render() {
+    const{roleList, roleListErr} = this.state
     return (
       <div className="sign-in-box new-signup-padding">
-        {this.state.emailValidationError ?<AlertPopup message="Email Already Exists."   closeAlertModal={this.closeAlertModal}/>: null}
-        {this.state.alertUserAdded? <AlertPopup message="User has been added."   closeAlertModal={this.closeAlertModal}/>: null}
+        {this.state.userAddedErr ?<AlertPopup message="Error! Please try again a while."   closeAlertModal={this.closeAlertModal}/>: null}
        
         <Container> 
           <Row>
@@ -200,7 +200,6 @@ class addUser extends Component {
                       type="text"
                       className="field-style"
                       name="employeeEmail"
-                      //   value={employeeEmail}
                       value={this.state.employeeEmail}
                       onChange={this.handleChange}
                     />
@@ -223,21 +222,7 @@ class addUser extends Component {
                     </div>
                   </Col>
                 </Row>
-                <Row className="margin-bottom-30">
-                  <Col lg={12}>
-                  <Form.Control
-                      placeholder="Contact Number*"
-                      type="number"
-                      className="field-style"
-                      onChange={this.handleChange}
-                      name="employeePhoneNumber"
-                      value={this.state.employeePhoneNumber}
-                    />
-                    <div className="validation-error">
-                      {this.state.employeePhoneNumberError}
-                    </div>
-                  </Col>
-                </Row>
+               
                 <Row className="margin-bottom-30">
                   <Col lg={12}>
                     <Form.Control
@@ -247,11 +232,10 @@ class addUser extends Component {
                       onChange={this.handleChange}
                       name="role"
                       value={this.state.role}
-                      // value={this.state.employee.value}
                     >
-                      <option>Role*</option>
-                      <option value="Admin">Admin</option>
-                      <option value="Member">Member</option>
+                     <option selected disabled  hidden>{this.state.role}</option>
+                        {roleList.length > 0 ? (roleList.map((user) => ( <option value={user.userRole} key={user._id}>{user.userRole}</option>))
+                        ) : ( <option>{this.state.roleListErr}</option>)}
                     </Form.Control>
                     <div className="validation-error">
                       {this.state.roleError}
