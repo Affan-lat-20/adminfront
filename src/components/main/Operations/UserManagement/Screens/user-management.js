@@ -24,6 +24,7 @@ export default class userManagement extends Component {
   constructor(){
     super()
     this.state={
+      IsresponseUsermanagementadd:false
 
     }
   }
@@ -37,7 +38,7 @@ export default class userManagement extends Component {
      try { const resp = await axios.get(`https://adminop.herokuapp.com/api/user/${data._id}/rolemanagment/Usermanagement/POST`);
       console.log(resp);
       this.setState({
-          IsresponseUsermanagement:true
+          IsresponseUsermanagementadd:true
       })
      } 
      catch (err) { 
