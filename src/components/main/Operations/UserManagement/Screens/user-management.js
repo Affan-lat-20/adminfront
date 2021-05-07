@@ -24,7 +24,8 @@ export default class userManagement extends Component {
   constructor(){
     super()
     this.state={
-      IsresponseUsermanagementadd:false
+      IsresponseUsermanagementadd:false,
+      users:[],
 
     }
   }
@@ -46,6 +47,21 @@ export default class userManagement extends Component {
 
 }
 }
+
+ getUsers = async () => {
+  let data= localStorage.getItem("adminToken");
+  data= JSON.parse(data)
+  console.log(data._id)
+  try {
+      const resp = await axios.get(`https://adminop.herokuapp.com/api/user/${data._id}/userlist/Usermanagement/GET`);
+      console.log(resp)
+      this.setState({...this.state, users:resp.data})
+  } catch (err) {
+      // Handle Error Here
+      console.error(err);
+  }
+};
+
   editUser = () =>{
     alert("USER EDIT")
   }
@@ -54,11 +70,11 @@ export default class userManagement extends Component {
   deleteUser = () =>{
     alert("Delete USER")
   }
+
+
   componentDidMount(){
-
     this.adduserCheck();
-    
-
+    this.getUsers();
 }
   render() {
     let adminToken = localStorage.getItem("adminToken");
@@ -75,7 +91,7 @@ export default class userManagement extends Component {
     }
     
 
-
+    const {users} = this.state
     return (
       <motion.div
         initial={{ opacity: 0.01 }}
@@ -115,17 +131,24 @@ export default class userManagement extends Component {
                     >
                       <thead>
                         <tr className="table borderless">
-                          <th>User</th>
+                          <th>User Name</th>
+                          <th>User Email</th>
+                          <th>User Role</th>
                           <th>Edit</th>
                           <th>Delete</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>affan@lathran.com</td>
+                        {this.state.users.map(user=>(
+                          <tr key={user._id}>
+                          <td>{`${user.firstName} ${user.lastName}`}</td>
+                          <td>{user.email}</td>
+                          <td>{user.userRole}</td>
                           <td> <FontAwesomeIcon icon={faEdit}  onClick={this.editUser}/></td>
                           <td><FontAwesomeIcon icon={faTrash} onClick={this.deleteUser}/></td>
-                        </tr>
+                          </tr>
+                        ))}
+                        
                       </tbody>
                     </Table>
                   </Col>
