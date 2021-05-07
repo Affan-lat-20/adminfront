@@ -40,17 +40,10 @@ class editUser extends Component {
       lastnameError:"",
       employeeEmail: "",
       employeeEmailError: "",
-      employeePhoneNumber: "",
-      employeePhoneNumberError: "",
-      role: "",
+      role: 'Roles',
       roleError: "",
-      employeePassword: "",
-      employeePasswordError: "",
-      loading:false,
-      userID:"",
-      isError:false,
-      emailValidationError:false,
-      alertUserAdded:false
+      roleList:"",
+      updateError:false
     };
   }
   closeAlertModal =()=>{
@@ -86,33 +79,13 @@ class editUser extends Component {
       errors.lastnameError = "This field cannot be left empty.";
     }
 
-    if (this.state.employeeEmail === "" || this.state.employeeEmail === null) {
-      isError = true;
-      errors.employeeEmailError = "This field cannot be left empty.";
-    }else if (!emailRegex.test(this.state.employeeEmail)) {
-      isError = true;
-      errors.employeeEmailError = "Not a valid email";
-    }
-    if (
-      this.state.employeePassword === "" ||
-      this.state.employeePassword === null
-    ) {
-      isError = true;
-      errors.employeePasswordError = "This field cannot be left empty.";
-    }else if (!passwordRegex.test(this.state.employeePassword)) {
-      isError = true;
-      errors.employeePasswordError = `Password must be 8 characters long,
-      including a number, capital letter and
-      special character.`
-    }
-      if (this.state.employeePhoneNumber === "" || this.state.employeePhoneNumber === null) {
-      isError = true;
-      errors.employeePhoneNumberError = "This field cannot be left empt.";
-    }
-    if (this.state.role === "" || this.state.role === null) {
-      isError = true;
-      errors.roleError = "This field cannot be left empty.";
-    }
+   
+
+  
+    // if (this.state.role === "" || this.state.role === null) {
+    //   isError = true;
+    //   errors.roleError = "This field cannot be left empty.";
+    // }
 
     this.setState({
       ...this.state,
@@ -130,13 +103,31 @@ class editUser extends Component {
     console.log(typeof this.props.location.state.id)
 
     const userId = this.props.location.state !== undefined ? parseInt(this.props.location.state.id):null
-    console.log(userId)
+    
     try {
-        const resp = await axios.get(`https://adminop.herokuapp.com/api/user/userGet/${userId}`);
+        const resp = await axios.get(`https://adminop.herokuapp.com/api/user/userGet/${this.props.location.state.id}`);
         if(resp.status === 200){
           console.log(resp , "FETCHED SINGLE")
-          // this.setState({...this.state,isEdit:true})
+          this.setState({
+            ...this.state,
+            firstname: resp.data.firstName,
+            lastname:resp.data.lastName,
+            employeeEmail: resp.data.email,
+            role: resp.data.userRole,
+        
+          })
         }
+    } catch (err) {
+        console.error(err);
+    }
+  };
+
+  getRoles = async () => {
+
+    try {
+        const resp = await axios.get(`https://adminop.herokuapp.com/api/user/rolename`);
+        console.log("ROLES", resp)
+        this.setState({...this.state, roleList:resp.data})
     } catch (err) {
         console.error(err);
     }
@@ -148,38 +139,36 @@ class editUser extends Component {
     const err = this.validate();
     if (!err) {
       const userDetails = {
-        first_name: this.state.firstname,
-        last_name:this.state.lastname,
-        email: this.state.employeeEmail,
-        phone: this.state.employeePhoneNumber,
-        password: this.state.employeePassword
+        firstName: this.state.firstname,
+        lastName: this.state.lastname,
+        userRole: this.state.role
       };
       this.handleSpinner();
+      console.log("userDetails",userDetails)
   
 
-     const  generateUser = async () => {
+     const  updateUser = async () => {
        console.log(userDetails)
-        const res = await axios.post("https://dev.flonzo.acspropel.com/flonzo/core_user", userDetails)
+        const res = await axios.put(`https://adminop.herokuapp.com/api/user/userGet/${this.props.location.state.id}`, userDetails)
         .then(res=>{
-          console.log(res)
+        console.log(res)
         this.props.history.push("/user-management")
-
-      
-     
         })
         .catch(err=>{
-          this.setState({...this.state,isError:true, loading:false})
+          this.setState({...this.state,updateError:true, loading:false})
         })
     };
-    generateUser();
+    updateUser();
 
 
     }
   };
   componentDidMount(){
     this.getUser();
+    this.getRoles()
   }
   render() {
+    const{role, roleList} = this.state
     return (
       <>
        <Container>
@@ -193,8 +182,7 @@ class editUser extends Component {
                 </Row>
               </Container>
       <div className="sign-in-box new-signup-padding">
-        {this.state.emailValidationError ?<AlertPopup message="Email Already Exists."   closeAlertModal={this.closeAlertModal}/>: null}
-        {this.state.alertUserAdded? <AlertPopup message="User has been added."   closeAlertModal={this.closeAlertModal}/>: null}
+        {this.state.updateError ?<AlertPopup message="Error! Please try again a while."   closeAlertModal={this.closeAlertModal}/>: null}
        
         <Container> 
           <Row>
@@ -208,7 +196,7 @@ class editUser extends Component {
                       className="field-style"
                       onChange={this.handleChange}
                       name="firstname"
-                      value={this.state.firstname}
+                      value={this.state.firstname||""}
                     />
                     <div className="validation-error">
                       {this.state.firstnameError}
@@ -237,44 +225,13 @@ class editUser extends Component {
                       name="employeeEmail"
                       //   value={employeeEmail}
                       value={this.state.employeeEmail}
-                      onChange={this.handleChange}
+                      readOnly
                     />
                     <div className="validation-error">
                       {this.state.employeeEmailError}
                     </div>
                   </Col>
-                  <Col lg={6} className="mobile-margin-top-30">
-                    <Form.Control
-                      placeholder="Password*"
-                      type="password"
-                      className="field-style"
-                      name="employeePassword"
-                      //   value={employeePassword}
-                      value={this.state.employeePassword}
-                      onChange={this.handleChange}
-                    />
-                    <div className="validation-error">
-                      {this.state.employeePasswordError}
-                    </div>
-                  </Col>
-                </Row>
-                <Row className="margin-bottom-30">
-                  <Col lg={12}>
-                  <Form.Control
-                      placeholder="Contact Number*"
-                      type="number"
-                      className="field-style"
-                      onChange={this.handleChange}
-                      name="employeePhoneNumber"
-                      value={this.state.employeePhoneNumber}
-                    />
-                    <div className="validation-error">
-                      {this.state.employeePhoneNumberError}
-                    </div>
-                  </Col>
-                </Row>
-                <Row className="margin-bottom-30">
-                  <Col lg={12}>
+                  <Col lg={6}>
                     <Form.Control
                       as="select"
                       className="field-style select-style dropdown-icon"
@@ -284,14 +241,20 @@ class editUser extends Component {
                       value={this.state.role}
                       // value={this.state.employee.value}
                     >
-                      <option>Role*</option>
-                      <option value="Admin">Admin</option>
-                      <option value="Member">Member</option>
+                      <option selected disabled  hidden>{this.state.role}</option>
+                        {roleList.length > 0 ? (roleList.map((user) => ( <option value={user.userRole} key={user._id}>{user.userRole}</option>))
+                        ) : ( <option>{this.state.roleListErr}</option>)}
+                      
                     </Form.Control>
                     <div className="validation-error">
                       {this.state.roleError}
                     </div>
                   </Col>
+             
+                </Row>
+              
+                <Row className="margin-bottom-30">
+                 
                 </Row><div className="validation-error">
                       {this.state.setError}
                     </div>
