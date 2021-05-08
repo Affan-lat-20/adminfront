@@ -132,7 +132,7 @@ showDelete = async () => {
       return (
         <Redirect
           to={{
-            pathname: "/signin",
+            pathname: "/",
           }}
         />
       );

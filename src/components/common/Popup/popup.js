@@ -50,7 +50,7 @@ export default function Popup(props) {
                 ></Modal.Title>
               </Col>
               <Col lg={4}>
-                {props.message === "User has been deleted."? (
+                {props.message === "User has been deleted." || props.message === "Role has been added"?(
                   <FontAwesomeIcon
                     icon={faCheckCircle}
                     size="3x"
@@ -58,6 +58,7 @@ export default function Popup(props) {
                     className="margin-top-40 margin-left-30 modal-mobile-size"
                   />
                 ) : null}
+              
 
          
                 {props.message === "Error in fetching data. Pls try again" ? (

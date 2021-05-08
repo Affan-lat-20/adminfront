@@ -29,7 +29,7 @@ if (adminToken == null) {
   return (
     <Redirect
       to={{
-        pathname: "/signin",
+        pathname: "/",
       }}
     />
   );
