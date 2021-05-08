@@ -88,7 +88,7 @@ showDelete = async () => {
   data= JSON.parse(data)
   console.log(data._id)
   try {
-      const resp = await axios.get(`https://adminop.herokuapp.com/api/user/${data._id}/rolemanagment/Usermanagement/PUT`);
+      const resp = await axios.get(`https://adminop.herokuapp.com/api/user/${data._id}/rolemanagment/Usermanagement/DELETE`);
       console.log("DELETE", resp)
       if(resp.status === 200){
         this.setState({...this.state,isDelete:true})
@@ -163,9 +163,12 @@ showDelete = async () => {
               <Container>
                 <Row className="margin-top-50">
                   <Col lg={12}>
+                    {this.state.IsresponseUsermanagementadd?
                     <div className="new-campaign-btn text-right">
                       <Link to="./addUser">Add User</Link>
                     </div>
+                    :null
+                    }
                   </Col>
                 </Row>
               </Container>
