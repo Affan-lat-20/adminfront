@@ -20,6 +20,8 @@ import { motion } from "framer-motion";
 import axios from "axios";
 import Spinner from "react-bootstrap/Spinner";
 import Alert from "../../../../common/Popup/popup"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {  faEdit,faTrash  } from "@fortawesome/free-solid-svg-icons";
 
 import baseURL from "../../../../../utils/common";
 
@@ -31,7 +33,9 @@ export default class allUsers extends Component {
       roleError:"",
       isRoleAdded:false,
       isRoleAddedError:false,
-      loading:false
+      loading:false,
+      rolesList:[],
+      isEdit:true
     };
   }
 
@@ -61,7 +65,8 @@ export default class allUsers extends Component {
         try {
             const resp = await axios.post(`https://adminop.herokuapp.com/api/user/rolename`, roleDetail);
             console.log(resp);
-            this.setState({...this.state,loading:false })
+            this.getRoles();
+            this.setState({...this.state,loading:false, role:"" })
         } catch (err) {
             // Handle Error Here
             console.error(err);
@@ -93,7 +98,22 @@ export default class allUsers extends Component {
     return isError;
   };
 
-  componentDidMount() {}
+  
+ getRoles = async () => {
+
+  try {
+      const resp = await axios.get(`https://adminop.herokuapp.com/api/user/rolename`);
+      console.log("ROLES",resp)
+      this.setState({...this.state, rolesList:resp.data})
+  } catch (err) {
+      // Handle Error Here
+      console.error(err);
+  }
+};
+
+  componentDidMount() {
+    this.getRoles();
+  }
   render() {
     return (
       <motion.div
@@ -112,13 +132,13 @@ export default class allUsers extends Component {
             >
               <AdminHeader />
               {/* <BrandDashboardSecondMenu /> */}
-              <Container>
+              <Container className="margin-vertical-30">
               {this.state.isRoleAdded ?<Alert message="Role has been added" closeAlertModal={this.closeAlertModal}/>: null}
               {this.state.isRoleAddedError ?<Alert message="Error! Please try again a while." closeAlertModal={this.closeAlertModal}/>: null}
               
                 <Form onSubmit={this.addRole}>
                   <Row className="margin-bottom-30 center">
-                    <Col lg={6}>
+                    <Col lg={3}>
                       <Form.Control
                         style={
                           this.state.loading
@@ -136,7 +156,7 @@ export default class allUsers extends Component {
                         {this.state.roleError}
                       </div>
                     </Col>
-                    <Col lg={6}>
+                    <Col lg={3}>
                       {this.state.loading ? (
                         <Button className="spinner-btn" disabled>
                           <Spinner animation="border" role="status">
@@ -149,8 +169,46 @@ export default class allUsers extends Component {
                         </Button>
                       )}
                     </Col>
+                    <Col lg={6}></Col>
+
                   </Row>
                 </Form>
+              </Container>
+              <Container>
+                <Row className="margin-vertical-30">
+                  <Col lg={12}>
+                    
+                    <Table
+                      responsive
+                      striped
+                      bordered
+                      hover
+                      className="text-left"
+                    >
+                            <thead>
+                            <tr className="table borderless">
+                              <th>User Role</th>
+                              <th>Status</th>
+                                <th>Edit</th>
+                            </tr>
+                            </thead>
+                            {this.state.rolesList.reverse().map(role=>(
+                              <>
+                              <tbody>
+                                  <tr key={role._id}  className="table borderless">
+                                  <td>{role.userRole}</td>
+                                  <td>{role.status}</td>
+                                  {this.state.isEdit?<Link  to={{pathname:"/edit-user",state: { id: role._id , }}}>
+                                  <td className="edit-icon" ><FontAwesomeIcon icon={faEdit} /></td></Link>:null}
+                                  {/* {isDelete?<td><FontAwesomeIcon icon={faTrash} onClick={()=>this.deleteUser(user._id)}  className="delete-icon"/></td>:null} */}
+                                  </tr>
+                              </tbody>
+                              </>
+                      ))}
+                  
+                    </Table>
+                  </Col>
+                </Row>
               </Container>
               <Footer />
             </Col>
