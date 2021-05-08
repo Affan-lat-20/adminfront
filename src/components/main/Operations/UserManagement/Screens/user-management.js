@@ -156,7 +156,7 @@ showDelete = async () => {
             </Col>
             <Col
               xs={10}
-              className="no-padding-horizontal dashboard-right-panel"
+              className="no-padding-horizontal dashboard-right-panel" 
             >
               <AdminDashboardHeader />
               {/* <BrandDashboardSecondMenu /> */}

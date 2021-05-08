@@ -18,6 +18,8 @@ import {  Link , Redirect} from "react-router-dom";
 import GoIcon from '../../../../../assets/images/back-btn.png';
 import { motion } from "framer-motion";
 import axios from "axios";
+import Spinner from 'react-bootstrap/Spinner';
+
 
 import baseURL from "../../../../../utils/common"
 
@@ -25,14 +27,24 @@ export default class allUsers extends Component {
     constructor(){
         super()
         this.state= {
-        
+        role:""
 
         }
     }
 
   
+    handleChange = (e) => {
+        this.setState({
+          [e.target.name]: e.target.value,
+        });
+      };
 
-      componentDidMount(){
+      
+      addRole=()=>{
+
+      }
+
+    componentDidMount(){
     }
     render() {
        
@@ -51,7 +63,21 @@ export default class allUsers extends Component {
                             <AdminHeader />
                             {/* <BrandDashboardSecondMenu /> */}
                             <Container>
-                              
+                            <Form onSubmit={this.addRole}>
+                            <Row className="margin-bottom-30 center">
+                            <Col lg={6}>
+                            <Form.Control style={ this.state.loading ? { opacity:'0.5'} : {opacity : '1'} } 
+                              placeholder="Role" type="text" className="field-style" name="role" value={this.state.role} onChange={this.handleChange}/>
+                              <div className="validation-error">{this.state.emailError}</div>
+                            </Col>
+                            <Col lg={6}>
+                            {this.state.loading?
+                              (<Button  className="spinner-btn" disabled><Spinner animation="border" role="status" >
+                              <span className="sr-only">Loading...</span></Spinner></Button>):
+                              (  <Button className="submit-btn"  type="submit" > Add Role</Button>)}
+                            </Col>
+                          </Row>
+                        </Form>
                             </Container>
                      
                             <Footer />

@@ -21,7 +21,7 @@ function Header() {
         <Nav className="home-page-navigation">
           <Link to="/">Home</Link>
           <Link to="/contact-us">Contact Us</Link>
-          <Link to="/signin">Sign in</Link>
+          {/* <Link to="/signin">Sign in</Link> */}
           {/* <Button className="submit-btn"  onClick={() => setModalShow(true)}>Get Started</Button> */}
         </Nav>
       </Navbar.Collapse>

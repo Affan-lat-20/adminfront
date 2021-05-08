@@ -31,11 +31,12 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/" component={HomePage}></Route>
+      <Route exact path="/" component={Signin}></Route>
+
+        {/* <Route exact path="/" component={HomePage}></Route> */}
         <Route exact path='/page-not-found' component={PageNotFound}></Route>
         <Route exact path='/schedule-meeting' component={ScheduleMeeting}></Route>
         <Route exact path='/contact-us' component={ContactUs}></Route>
-        <Route exact path="/signin" component={Signin}></Route>
         <Route exact path="/forget-password" component={ForgetPassword}></Route>
         <Route exact path="/reset-password" component={ResetPassword}></Route>
         <Route exact path='/coming-soon' component={ComingSoon}></Route>
