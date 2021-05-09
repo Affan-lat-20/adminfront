@@ -35,7 +35,8 @@ export default class allUsers extends Component {
       isRoleAddedError:false,
       loading:false,
       rolesList:[],
-      isEdit:true
+      isEdit:true,
+      isServerError:false
     };
   }
 
@@ -48,7 +49,7 @@ export default class allUsers extends Component {
     this.setState({...this.state,loading:true})
   }
   closeAlertModal =()=>{
-    this.setState({...this.state, isRoleAdded:false, isRoleAddedError:false})
+    this.setState({...this.state, isRoleAdded:false, isRoleAddedError:false, isServerError:false})
   } 
 
   addRole = (e) => {
@@ -107,7 +108,9 @@ export default class allUsers extends Component {
       this.setState({...this.state, rolesList:resp.data})
   } catch (err) {
       // Handle Error Here
-      console.error(err);
+      if(err.message === "Request failed with status code 503"){
+        this.setState({...this.state, isServerError:true})
+      }
   }
 };
 
@@ -135,6 +138,7 @@ export default class allUsers extends Component {
               <Container className="margin-vertical-30">
               {this.state.isRoleAdded ?<Alert message="Role has been added" closeAlertModal={this.closeAlertModal}/>: null}
               {this.state.isRoleAddedError ?<Alert message="Error! Please try again a while." closeAlertModal={this.closeAlertModal}/>: null}
+              {this.state.isServerError ?<Alert message="Error in fetching data. Pls try again" closeAlertModal={this.closeAlertModal}/>: null}
               
                 <Form onSubmit={this.addRole}>
                   <Row className="margin-bottom-30 center">

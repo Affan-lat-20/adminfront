@@ -50,7 +50,7 @@ export default function Popup(props) {
                 ></Modal.Title>
               </Col>
               <Col lg={4}>
-                {props.message === "User has been deleted." || props.message === "Role has been added"?(
+                {props.message === "User has been deleted." || props.message === "Role has been added" || props.message === "Successfully Added."?(
                   <FontAwesomeIcon
                     icon={faCheckCircle}
                     size="3x"

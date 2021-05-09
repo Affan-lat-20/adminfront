@@ -16,6 +16,8 @@ import AlertPopup from "../../../../common/Popup/popup";
 import BackButton from "../../../../../assets/images/back-btn.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {  faCircle,faTrash  } from "@fortawesome/free-solid-svg-icons";
+import "./editrole.css";
+import Alert from "../../../../common/Popup/popup"
 
 let token = localStorage.getItem("token");
 token = JSON.parse(token);
@@ -26,7 +28,14 @@ class editRole extends Component {
     console.log("EDIT ROLE", props);
     this.state = {
         get_isArrayEmpty:false,
-        get_isArrayNotEmpty:false
+        put_isArrayEmpty:false,
+        post_isArrayEmpty:false,
+        delete_isArrayEmpty:false,
+        isGetAdded:false,
+        isPutAdded:false,
+        isPostAdded:false,
+        isDeleteAdded:false,
+
     };
   }
   closeAlertModal = () => {
@@ -43,64 +52,214 @@ class editRole extends Component {
     this.setState({ loading: true });
   };
 
-  getRequestForUserManagement = async () => {
+    getRequestForUserManagement = async () => {
+        const role= this.props.location.state.role.userRole
+        console.log(role)
+
+        try {
+        const resp = await axios.get(
+            `https://adminop.herokuapp.com/api/user/rolebase?userRole=${this.props.location.state.role.userRole}&module=Usermanagement&operation=GET`)
+            console.log(resp, "user get");
+            if(resp.data.length === 0){
+                this.setState({
+                    ...this.state,
+                    get_isArrayEmpty:true
+                })
+                
+            }else{
+                this.setState({...this.state, get_isArrayNotEmpty:true, get_isArrayEmpty:false})
+            }
+        } catch (err) {
+        console.error(err);
+        }
+    };
+
+    putRequestForUserManagement = async () => {
+        const role= this.props.location.state.role.userRole
+        console.log(role)
 
     try {
-      const resp = await axios.get(
-        `https://adminop.herokuapp.com/api/user/rolebase?userRole=${this.props.location.state.role.userRole}&module=Usermanagement&operation=GET`)
+        const resp = await axios.get(
+        `https://adminop.herokuapp.com/api/user/rolebase?userRole=${this.props.location.state.role.userRole}&module=Usermanagement&operation=PUT`)
         console.log(resp, "user get");
         if(resp.data.length === 0){
             this.setState({
                 ...this.state,
-                get_isArrayEmpty:true
+                put_isArrayEmpty:true
             })
             
         }else{
-            this.setState({...this.state, get_isArrayNotEmpty:true, get_isArrayEmpty:false})
+            this.setState({...this.state, get_isArrayNotEmpty:true, put_isArrayEmpty:false})
         }
     } catch (err) {
-      console.error(err);
+        console.error(err);
     }
-  };
-  addGet=()=>{
-    const postRequest = async () => {
-        const userRole = this.props.location.state.role.userRole
-        console.log(userRole)
-        try {
-          const resp = await axios.post(`https://adminop.herokuapp.com/api/user/rolebase`,{
-            "userRole": userRole,
-            "module": "Usermanagement",
-            "operation": "GET"
-          })
-            console.log(resp, "add get");
-            this.getRequestForUserManagement()
-      
-        } catch (err) {
-          console.error(err);
-        }
-      };
-      postRequest()
-  }
+    };
+    postRequestForUserManagement = async () => {
+        const role= this.props.location.state.role.userRole
+        console.log(role)
 
-  deleteGet=()=>{
-    const deleteRequest = async () => {
-        const userId = this.props.location.state.role._id
-        console.log(userId)
-        try {
-          const resp = await axios.get(`https://adminop.herokuapp.com/api/user/rolebase/${userId}`)
-            console.log(resp, "delete get");
-            this.getRequestForUserManagement()
-      
-        } catch (err) {
-          console.error(err);
+    try {
+        const resp = await axios.get(
+        `https://adminop.herokuapp.com/api/user/rolebase?userRole=${this.props.location.state.role.userRole}&module=Usermanagement&operation=POST`)
+        console.log(resp, "user get");
+        if(resp.data.length === 0){
+            this.setState({
+                ...this.state,
+                post_isArrayEmpty:true
+            })
+            
+        }else{
+            this.setState({...this.state, get_isArrayNotEmpty:true,  post_isArrayEmpty:false})
         }
-      };
-      deleteRequest()
-  }
+    } catch (err) {
+        console.error(err);
+    }
+    };
+    deleteRequestForUserManagement = async () => {
+        const role= this.props.location.state.role.userRole
+        console.log(role)
+
+    try {
+        const resp = await axios.get(
+        `https://adminop.herokuapp.com/api/user/rolebase?userRole=${this.props.location.state.role.userRole}&module=Usermanagement&operation=DELETE`)
+        console.log(resp, "user get");
+        if(resp.data.length === 0){
+            this.setState({
+                ...this.state,
+                delete_isArrayEmpty:true
+            })
+            
+        }else{
+            this.setState({...this.state, get_isArrayNotEmpty:true,  delete_isArrayEmpty:false})
+        }
+    } catch (err) {
+        console.error(err);
+    }
+    };
+
+    addGet=()=>{
+        const postRequest = async () => {
+            const userRole = this.props.location.state.role.userRole
+            console.log(userRole)
+            try {
+            const resp = await axios.post(`https://adminop.herokuapp.com/api/user/rolebase`,{
+                "userRole": userRole,
+                "module": "Usermanagement",
+                "operation": "GET"
+            })
+                console.log(resp, "add get");
+                this.setState({...this.state , isGetAdded:true})
+                this.getRequestForUserManagement()
+        
+            } catch (err) {
+            console.error(err);
+            }
+        };
+        postRequest()
+    }
+    addPut=()=>{
+        const postRequest = async () => {
+            const userRole = this.props.location.state.role.userRole
+            console.log(userRole)
+            try {
+            const resp = await axios.post(`https://adminop.herokuapp.com/api/user/rolebase`,{
+                "userRole": userRole,
+                "module": "Usermanagement",
+                "operation": "PUT"
+            })
+                console.log(resp, "add get");
+                this.setState({...this.state, isPutAdded:true})
+                this.putRequestForUserManagement()
+        
+            } catch (err) {
+            console.error(err);
+            }
+        };
+        postRequest()
+    }
+    addPost=()=>{
+        const postRequest = async () => {
+            const userRole = this.props.location.state.role.userRole
+            console.log(userRole)
+            try {
+            const resp = await axios.post(`https://adminop.herokuapp.com/api/user/rolebase`,{
+                "userRole": userRole,
+                "module": "Usermanagement",
+                "operation": "POST"
+            })
+                console.log(resp, "add post");
+                this.setState({...this.state, isPostAdded:true})
+
+                this.postRequestForUserManagement()
+        
+            } catch (err) {
+            console.error(err);
+            }
+        };
+        postRequest()
+    }
+    addDelete=()=>{
+        const postRequest = async () => {
+            const userRole = this.props.location.state.role.userRole
+            console.log(userRole)
+            try {
+            const resp = await axios.post(`https://adminop.herokuapp.com/api/user/rolebase`,{
+                "userRole": userRole,
+                "module": "Usermanagement",
+                "operation": "DELETE"
+            })
+                console.log(resp, "add delete");
+                this.setState({...this.state, isDeleteAdded:true})
+                this.deleteRequestForUserManagement()
+        
+            } catch (err) {
+            console.error(err);
+            }
+        };
+        postRequest()
+    }
+
+    deleteGet=()=>{
+        const deleteRequest = async () => {
+            const userId = this.props.location.state.role._id
+            console.log(userId)
+            try {
+            const resp = await axios.delete(`https://adminop.herokuapp.com/api/user/rolebase/${userId}`)
+                console.log(resp, "delete get");
+                this.getRequestForUserManagement()
+        
+            } catch (err) {
+            console.error(err);
+            }
+        };
+        deleteRequest()
+    }
+    deletePUT=()=>{
+        const deleteRequest = async () => {
+            const userId = this.props.location.state.role._id
+            console.log(userId)
+            try {
+            const resp = await axios.delete(`https://adminop.herokuapp.com/api/user/rolebase/${userId}`)
+                console.log(resp, "delete put");
+                this.getRequestForUserManagement()
+        
+            } catch (err) {
+            console.error(err);
+            }
+        };
+        deleteRequest()
+    }
+    closeAlertModal =()=>{
+        this.setState({...this.state, isGetAdded:false})
+      }
 
 
   componentDidMount() {
     this.getRequestForUserManagement();
+    this.putRequestForUserManagement();
+    this.postRequestForUserManagement();
+    this.deleteRequestForUserManagement();
   }
   render() {
     const style={
@@ -112,6 +271,9 @@ class editRole extends Component {
     return (
       <>
         <Container>
+        {this.state.isGetAdded || this.state.isPutAdded || this.state.isPostAdded || this.state.isDeleteAdded?<Alert message="Successfully Added."   closeAlertModal={this.closeAlertModal}/>: null}
+        
+
           <Row>
             <Col lg={12} className="margin-top-50">
               <Link to="/role-management">
@@ -142,22 +304,22 @@ class editRole extends Component {
             <Row>
                 <Col lg={3}></Col>
                 <Col lg={2}>POST</Col>
-                <Col lg={2}><div ><FontAwesomeIcon icon={faCircle} /></div></Col>
-                <Col lg={2}>Delete</Col>
+                <Col lg={2}><div ><FontAwesomeIcon icon={faCircle} color={this.state.post_isArrayEmpty?"grey":"green"} /></div></Col>
+                <Col lg={2}>{this.state.post_isArrayEmpty? <span onClick={this.addPost}>Add</span>: <span onClick={this.deleteGet}>Delete</span>}</Col>
                 <Col lg={3}></Col>
             </Row>
             <Row>
                 <Col lg={3}></Col>
                 <Col lg={2}>PUT</Col>
-                <Col lg={2}><div ><FontAwesomeIcon icon={faCircle} /></div></Col>
-                <Col lg={2}>Delete</Col>
+                <Col lg={2}><div ><FontAwesomeIcon icon={faCircle} color={this.state.put_isArrayEmpty?"grey":"green"} /></div></Col>
+                <Col lg={2}>{this.state.put_isArrayEmpty? <span onClick={this.addPut}>Add</span>: <span onClick={this.deleteGet}>Delete</span>}</Col>
                 <Col lg={3}></Col>
             </Row>
             <Row>
                 <Col lg={3}></Col>
                 <Col lg={2}>DELETE</Col>
-                <Col lg={2}><div ><FontAwesomeIcon icon={faCircle} /></div></Col>
-                <Col lg={2}>Delete</Col>
+                <Col lg={2}><div ><FontAwesomeIcon icon={faCircle} color={this.state.delete_isArrayEmpty?"grey":"green"} /></div></Col>
+                <Col lg={2}>{this.state.delete_isArrayEmpty? <span onClick={this.addDelete}>Add</span>: <span onClick={this.deleteGet}>Delete</span>}</Col>
                 <Col lg={3}></Col>
             </Row>
 
