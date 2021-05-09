@@ -19,6 +19,7 @@ import RoleManagement from './components/main/Operations/RoleManagement/Screens/
 import Logs from "./components/main/Operations/Logs/Screens/logs";
 import AddUser from "./components/main/Operations/UserManagement/Components/addUser";
 import EditUser from "./components/main/Operations/UserManagement/Screens/edit-user";
+import EditRole from "./components/main/Operations/RoleManagement/Screens/edit-role";
 
 
 
@@ -48,6 +49,10 @@ function App() {
         <Route exact path='/logs' component={Logs}></Route>
         <Route exact path='/addUser' component={AddUser}></Route>
         <Route exact path='/edit-user' component={EditUser}></Route>
+        <Route exact path='/edit-role' component={EditRole}></Route>
+
+
+
 
 
 

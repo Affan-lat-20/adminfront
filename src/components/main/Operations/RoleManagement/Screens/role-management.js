@@ -198,7 +198,7 @@ export default class allUsers extends Component {
                                   <tr key={role._id}  className="table borderless">
                                   <td>{role.userRole}</td>
                                   <td>{role.status}</td>
-                                  {this.state.isEdit?<Link  to={{pathname:"/edit-user",state: { id: role._id , }}}>
+                                  {this.state.isEdit?<Link  to={{pathname:"/edit-role",state: { role: role }}}>
                                   <td className="edit-icon" ><FontAwesomeIcon icon={faEdit} /></td></Link>:null}
                                   {/* {isDelete?<td><FontAwesomeIcon icon={faTrash} onClick={()=>this.deleteUser(user._id)}  className="delete-icon"/></td>:null} */}
                                   </tr>
