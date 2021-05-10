@@ -50,7 +50,7 @@ export default function Popup(props) {
                 ></Modal.Title>
               </Col>
               <Col lg={4}>
-                {props.message === "Successfully Deleted"?<FontAwesomeIcon icon={faCheckCircle} size="3x" className="margin-top-40 margin-left-30 modal-mobile-size"/>:null}
+                {props.message === "Successfully Deleted." ?<FontAwesomeIcon icon={faCheckCircle} size="3x" color="green" className="margin-top-40 margin-left-30 modal-mobile-size"/>:null}
                 {props.message === "User has been deleted." || props.message === "Role has been added" || props.message === "Successfully Added."?(
                   <FontAwesomeIcon
                     icon={faCheckCircle}
