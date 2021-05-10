@@ -21,6 +21,11 @@ import Alert from "../../../../common/Popup/popup"
 
 let token = localStorage.getItem("token");
 token = JSON.parse(token);
+let get_id;
+let put_id;
+let post_id;
+let delete_id;
+
 
 class editRole extends Component {
   constructor(props) {
@@ -35,7 +40,10 @@ class editRole extends Component {
         isPutAdded:false,
         isPostAdded:false,
         isDeleteAdded:false,
-
+        isGetDeleted:false,
+        isPutDeleted:false,
+        isPostDeleted:false,
+        isDelDeleted:false
     };
   }
   closeAlertModal = () => {
@@ -67,6 +75,7 @@ class editRole extends Component {
                 })
                 
             }else{
+                get_id = resp.data[0]._id
                 this.setState({...this.state, get_isArrayNotEmpty:true, get_isArrayEmpty:false})
             }
         } catch (err) {
@@ -89,6 +98,7 @@ class editRole extends Component {
             })
             
         }else{
+            put_id = resp.data[0]._id
             this.setState({...this.state, get_isArrayNotEmpty:true, put_isArrayEmpty:false})
         }
     } catch (err) {
@@ -110,6 +120,7 @@ class editRole extends Component {
             })
             
         }else{
+            post_id = resp.data[0]._id
             this.setState({...this.state, get_isArrayNotEmpty:true,  post_isArrayEmpty:false})
         }
     } catch (err) {
@@ -131,6 +142,7 @@ class editRole extends Component {
             })
             
         }else{
+            delete_id = resp.data[0]._id
             this.setState({...this.state, get_isArrayNotEmpty:true,  delete_isArrayEmpty:false})
         }
     } catch (err) {
@@ -149,7 +161,7 @@ class editRole extends Component {
                 "operation": "GET"
             })
                 console.log(resp, "add get");
-                this.setState({...this.state , isGetAdded:true})
+                this.setState({...this.state , isGetAdded:true, isGetDeleted:false})
                 this.getRequestForUserManagement()
         
             } catch (err) {
@@ -169,7 +181,7 @@ class editRole extends Component {
                 "operation": "PUT"
             })
                 console.log(resp, "add get");
-                this.setState({...this.state, isPutAdded:true})
+                this.setState({...this.state, isPutAdded:true, isPutDeleted:false})
                 this.putRequestForUserManagement()
         
             } catch (err) {
@@ -222,11 +234,11 @@ class editRole extends Component {
 
     deleteGet=()=>{
         const deleteRequest = async () => {
-            const userId = this.props.location.state.role._id
-            console.log(userId)
+          
             try {
-            const resp = await axios.delete(`https://adminop.herokuapp.com/api/user/rolebase/${userId}`)
+            const resp = await axios.delete(`https://adminop.herokuapp.com/api/user/rolebase/${get_id}`)
                 console.log(resp, "delete get");
+                this.setState({...this.state, isGetDeleted:true, isGetAdded:false})
                 this.getRequestForUserManagement()
         
             } catch (err) {
@@ -240,9 +252,42 @@ class editRole extends Component {
             const userId = this.props.location.state.role._id
             console.log(userId)
             try {
-            const resp = await axios.delete(`https://adminop.herokuapp.com/api/user/rolebase/${userId}`)
+            const resp = await axios.delete(`https://adminop.herokuapp.com/api/user/rolebase/${put_id}`)
                 console.log(resp, "delete put");
-                this.getRequestForUserManagement()
+                this.setState({...this.state, isPutDeleted:true, isPutAdded:false})
+                this.putRequestForUserManagement()
+        
+            } catch (err) {
+            console.error(err);
+            }
+        };
+        deleteRequest()
+    }
+    deletePost=()=>{
+        const deleteRequest = async () => {
+            const userId = this.props.location.state.role._id
+            console.log(userId)
+            try {
+            const resp = await axios.delete(`https://adminop.herokuapp.com/api/user/rolebase/${post_id}`)
+                console.log(resp, "delete put");
+                this.setState({...this.state, isPostDeleted:true, isDeleteAdded:false})
+                this.postRequestForUserManagement()
+        
+            } catch (err) {
+            console.error(err);
+            }
+        };
+        deleteRequest()
+    }
+    deleteDelete=()=>{
+        const deleteRequest = async () => {
+            const userId = this.props.location.state.role._id
+            console.log(userId)
+            try {
+            const resp = await axios.delete(`https://adminop.herokuapp.com/api/user/rolebase/${delete_id}`)
+                console.log(resp, "delete put");
+                this.setState({...this.state, isDelDeleted:true, isDeleteAdded:false})
+                this.deleteRequestForUserManagement()
         
             } catch (err) {
             console.error(err);
@@ -252,7 +297,7 @@ class editRole extends Component {
     }
     closeAlertModal =()=>{
         this.setState({...this.state, isGetAdded:false})
-      }
+    }
 
 
   componentDidMount() {
@@ -262,6 +307,9 @@ class editRole extends Component {
     this.deleteRequestForUserManagement();
   }
   render() {
+      console.log(get_id)
+      console.log(put_id)
+
     const style={
         display: "flex",
         justifyContent:" space-evenly",
@@ -272,6 +320,7 @@ class editRole extends Component {
       <>
         <Container>
         {this.state.isGetAdded || this.state.isPutAdded || this.state.isPostAdded || this.state.isDeleteAdded?<Alert message="Successfully Added."   closeAlertModal={this.closeAlertModal}/>: null}
+        {this.state.isGetDeleted || this.state.isPutDeleted || this.state.isPostDeleted || this.state.isDelDeleted ?<Alert message="Successfully Deleted."   closeAlertModal={this.closeAlertModal}/>: null}
         
 
           <Row>
@@ -305,21 +354,21 @@ class editRole extends Component {
                 <Col lg={3}></Col>
                 <Col lg={2}>POST</Col>
                 <Col lg={2}><div ><FontAwesomeIcon icon={faCircle} color={this.state.post_isArrayEmpty?"grey":"green"} /></div></Col>
-                <Col lg={2}>{this.state.post_isArrayEmpty? <span onClick={this.addPost}>Add</span>: <span onClick={this.deleteGet}>Delete</span>}</Col>
+                <Col lg={2}>{this.state.post_isArrayEmpty? <span onClick={this.addPost}>Add</span>: <span onClick={this.deletePost}>Delete</span>}</Col>
                 <Col lg={3}></Col>
             </Row>
             <Row>
                 <Col lg={3}></Col>
                 <Col lg={2}>PUT</Col>
                 <Col lg={2}><div ><FontAwesomeIcon icon={faCircle} color={this.state.put_isArrayEmpty?"grey":"green"} /></div></Col>
-                <Col lg={2}>{this.state.put_isArrayEmpty? <span onClick={this.addPut}>Add</span>: <span onClick={this.deleteGet}>Delete</span>}</Col>
+                <Col lg={2}>{this.state.put_isArrayEmpty? <span onClick={this.addPut}>Add</span>: <span onClick={this.deletePUT}>Delete</span>}</Col>
                 <Col lg={3}></Col>
             </Row>
             <Row>
                 <Col lg={3}></Col>
                 <Col lg={2}>DELETE</Col>
                 <Col lg={2}><div ><FontAwesomeIcon icon={faCircle} color={this.state.delete_isArrayEmpty?"grey":"green"} /></div></Col>
-                <Col lg={2}>{this.state.delete_isArrayEmpty? <span onClick={this.addDelete}>Add</span>: <span onClick={this.deleteGet}>Delete</span>}</Col>
+                <Col lg={2}>{this.state.delete_isArrayEmpty? <span onClick={this.addDelete}>Add</span>: <span onClick={this.deleteDelete}>Delete</span>}</Col>
                 <Col lg={3}></Col>
             </Row>
 
