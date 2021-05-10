@@ -32,11 +32,13 @@ export default class allUsers extends Component {
       role: "",
       roleError:"",
       isRoleAdded:false,
+      isroleEdit:false,
       isRoleAddedError:false,
       loading:false,
       rolesList:[],
-      isEdit:true,
-      isServerError:false
+      isEdit:false,
+      isServerError:false,
+      IsresponseRolemangementadd:false
     };
   }
 
@@ -50,7 +52,40 @@ export default class allUsers extends Component {
   }
   closeAlertModal =()=>{
     this.setState({...this.state, isRoleAdded:false, isRoleAddedError:false, isServerError:false})
-  } 
+  }
+  
+  showroleEdit = async () => {
+    let data= localStorage.getItem("adminToken");
+    data= JSON.parse(data)
+    console.log(data._id)
+    try {
+        const resp = await axios.get(`https://adminop.herokuapp.com/api/user/${data._id}/rolemanagment/Rolemanagement/PUT`);
+        if(resp.status === 200){
+          this.setState({isEdit:true})
+        }
+    } catch (err) {
+        // Handle Error Here
+        console.error(err);
+    }
+  };
+
+  addroleCheck = async () => {
+    let data= localStorage.getItem("adminToken");
+    data= JSON.parse(data)
+    console.log(data._id)
+
+    // console.log(typeof details)
+     try { const resp = await axios.get(`https://adminop.herokuapp.com/api/user/${data._id}/rolemanagment/Rolemanagement/POST`);
+      console.log(resp);
+      this.setState({
+          IsresponseRolemangementadd:true
+      })
+     } 
+     catch (err) { 
+        console.log(err);
+
+}
+}
 
   addRole = (e) => {
     e.preventDefault();
@@ -115,7 +150,9 @@ export default class allUsers extends Component {
 };
 
   componentDidMount() {
+    this.addroleCheck();
     this.getRoles();
+    this.showroleEdit();
   }
   render() {
     return (
@@ -140,6 +177,7 @@ export default class allUsers extends Component {
               {this.state.isRoleAddedError ?<Alert message="Error! Please try again a while." closeAlertModal={this.closeAlertModal}/>: null}
               {this.state.isServerError ?<Alert message="Error in fetching data. Pls try again" closeAlertModal={this.closeAlertModal}/>: null}
               
+              {this.state.IsresponseRolemangementadd?
                 <Form onSubmit={this.addRole}>
                   <Row className="margin-bottom-30 center">
                     <Col lg={3}>
@@ -177,6 +215,7 @@ export default class allUsers extends Component {
 
                   </Row>
                 </Form>
+                :null}
               </Container>
               <Container>
                 <Row className="margin-vertical-30">
@@ -202,6 +241,7 @@ export default class allUsers extends Component {
                                   <tr key={role._id}  className="table borderless">
                                   <td>{role.userRole}</td>
                                   <td>{role.status}</td>
+                                 
                                   {this.state.isEdit?<Link  to={{pathname:"/edit-role",state: { role: role }}}>
                                   <td className="edit-icon" ><FontAwesomeIcon icon={faEdit} /></td></Link>:null}
                                   {/* {isDelete?<td><FontAwesomeIcon icon={faTrash} onClick={()=>this.deleteUser(user._id)}  className="delete-icon"/></td>:null} */}
