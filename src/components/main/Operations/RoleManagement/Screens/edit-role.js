@@ -54,9 +54,7 @@ class editRole extends Component {
         isDelDeleted:false
     };
   }
-  closeAlertModal = () => {
-    this.setState({ ...this.state, isError: false });
-  };
+
 
   handleChange = (e) => {
     this.setState({
@@ -87,7 +85,7 @@ class editRole extends Component {
                 this.setState({...this.state, get_isArrayNotEmpty:true, get_isArrayEmpty:false})
             }
         } catch (err) {
-        console.error(err);
+        alert(err);
         }
     };
 
@@ -110,7 +108,7 @@ class editRole extends Component {
             this.setState({...this.state, get_isArrayNotEmpty:true, put_isArrayEmpty:false})
         }
     } catch (err) {
-        console.error(err);
+        alert(err);
     }
     };
     postRequestForUserManagement = async () => {
@@ -132,7 +130,7 @@ class editRole extends Component {
             this.setState({...this.state, get_isArrayNotEmpty:true,  post_isArrayEmpty:false})
         }
     } catch (err) {
-        console.error(err);
+        alert(err);
     }
     };
     deleteRequestForUserManagement = async () => {
@@ -154,7 +152,7 @@ class editRole extends Component {
             this.setState({...this.state, get_isArrayNotEmpty:true,  delete_isArrayEmpty:false})
         }
     } catch (err) {
-        console.error(err);
+        alert(err);
     }
     };
 
@@ -173,7 +171,7 @@ class editRole extends Component {
                 this.getRequestForUserManagement()
         
             } catch (err) {
-            console.error(err);
+            alert(err);
             }
         };
         postRequest()
@@ -193,7 +191,7 @@ class editRole extends Component {
                 this.putRequestForUserManagement()
         
             } catch (err) {
-            console.error(err);
+            alert(err);
             }
         };
         postRequest()
@@ -214,7 +212,7 @@ class editRole extends Component {
                 this.postRequestForUserManagement()
         
             } catch (err) {
-            console.error(err);
+            alert(err);
             }
         };
         postRequest()
@@ -234,7 +232,7 @@ class editRole extends Component {
                 this.deleteRequestForUserManagement()
         
             } catch (err) {
-            console.error(err);
+            alert(err);
             }
         };
         postRequest()
@@ -250,7 +248,7 @@ class editRole extends Component {
                 this.getRequestForUserManagement()
         
             } catch (err) {
-            console.error(err);
+            alert(err);
             }
         };
         deleteRequest()
@@ -266,7 +264,7 @@ class editRole extends Component {
                 this.putRequestForUserManagement()
         
             } catch (err) {
-            console.error(err);
+            alert(err);
             }
         };
         deleteRequest()
@@ -282,7 +280,7 @@ class editRole extends Component {
                 this.postRequestForUserManagement()
         
             } catch (err) {
-            console.error(err);
+            alert(err);
             }
         };
         deleteRequest()
@@ -298,7 +296,7 @@ class editRole extends Component {
                 this.deleteRequestForUserManagement()
         
             } catch (err) {
-            console.error(err);
+            alert(err);
             }
         };
         deleteRequest()
@@ -322,10 +320,11 @@ getRequestForRoleManagement = async () => {
             
         }else{
             get_id_Role = resp.data[0]._id
-            this.setState({...this.state, get_isArrayEmptyRole:false})
+        this.setState({...this.state,  get_isArrayEmptyRole:false})
+
         }
     } catch (err) {
-    console.error(err);
+    alert(err);
     }
 };
 putRequestForRoleManagement = async () => {
@@ -347,7 +346,7 @@ try {
         this.setState({...this.state,  put_isArrayEmptyRole:false})
     }
 } catch (err) {
-    console.error(err);
+    alert(err);
 }
 };
 postRequestForRoleManagement = async () => {
@@ -357,7 +356,7 @@ postRequestForRoleManagement = async () => {
 try {
     const resp = await axios.get(
     `https://adminop.herokuapp.com/api/user/rolebase?userRole=${this.props.location.state.role.userRole}&module=Rolemanagement&operation=POST`)
-    console.log(resp, "user get");
+    console.log(resp, "postRequestForRoleManagement");
     if(resp.data.length === 0){
         this.setState({
             ...this.state,
@@ -369,7 +368,7 @@ try {
         this.setState({...this.state, post_isArrayEmptyRole:false})
     }
 } catch (err) {
-    console.error(err);
+    alert(err);
 }
 };
 addRoleGet=()=>{
@@ -387,7 +386,7 @@ addRoleGet=()=>{
             this.getRequestForRoleManagement()
     
         } catch (err) {
-        console.error(err);
+        alert(err);
         }
     };
     postRequest()
@@ -407,7 +406,7 @@ addRolePut=()=>{
             this.putRequestForRoleManagement()
     
         } catch (err) {
-        console.error(err);
+        alert(err);
         }
     };
     postRequest()
@@ -428,7 +427,7 @@ addRolePost=()=>{
             this.postRequestForRoleManagement()
     
         } catch (err) {
-        console.error(err);
+        alert(err);
         }
     };
     postRequest()
@@ -445,7 +444,7 @@ deleteGetRole=()=>{
             this.getRequestForRoleManagement()
     
         } catch (err) {
-        console.error(err);
+        alert(err);
         }
     };
     deleteRequest()
@@ -460,7 +459,7 @@ deletePutRole=()=>{
             this.putRequestForRoleManagement()
     
         } catch (err) {
-        console.error(err);
+        alert(err);
         }
     };
     deleteRequest()
@@ -475,15 +474,16 @@ deletePostRole=()=>{
             this.postRequestForRoleManagement()
     
         } catch (err) {
-        console.error(err);
+        alert(err);
         }
     };
     deleteRequest()
 }
 
     closeAlertModal =()=>{
-        this.setState({...this.state, isGetAdded:false})
+        this.setState({...this.state, isGetAdded:false, isPutDeleted:false, isPostDeleted:false,isGetDeleted:false, isPostAdded:false, isPutAdded:false, isDelDeleted:false })
     }
+  
 
 
   componentDidMount() {
@@ -493,8 +493,8 @@ deletePostRole=()=>{
     this.deleteRequestForUserManagement();
     // Role
     this.getRequestForRoleManagement();
-    this.putRequestForRoleManagement();
-    this.postRequestForRoleManagement()
+        this.putRequestForRoleManagement();
+        this.postRequestForRoleManagement()
   }
   render() {
       console.log(get_id)
@@ -579,7 +579,7 @@ deletePostRole=()=>{
             <Row>
                 <Col lg={3}></Col>
                 <Col lg={2}>GET</Col>
-                <Col lg={2}><div ><FontAwesomeIcon icon={faCircle} color={this.state.get_isArrayEmpty?"grey":"green"}/></div></Col>
+                <Col lg={2}><div ><FontAwesomeIcon icon={faCircle} color={this.state.get_isArrayEmptyRole?"grey":"green"}/></div></Col>
                 <Col lg={2}>{this.state.get_isArrayEmptyRole ? <span onClick={this.addRoleGet}>Add</span>: <span onClick={this.deleteGetRole}>Delete</span>}</Col>
                 <Col lg={3}></Col>
             </Row>
