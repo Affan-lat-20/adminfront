@@ -138,7 +138,10 @@ class addUser extends Component {
   
 
      const  addeUser = async () => {
-        const res = await axios.post("https://adminop.herokuapp.com/api/user/register", userDetails)
+      let data= localStorage.getItem("adminToken");
+      data= JSON.parse(data)
+      console.log(data._id)
+        const res = await axios.post(`https://adminop.herokuapp.com/api/user/${data._id}/register/Usermanagement/POST`, userDetails)
         .then(res=>{
           console.log(res)
           this.props.history.push("/user-management")

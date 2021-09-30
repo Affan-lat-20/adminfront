@@ -543,7 +543,7 @@ deletePostRole=()=>{
             <Row>
                 <Col lg={3}></Col>
                 <Col lg={2}>POST</Col>
-                <Col lg={2}><div ><FontAwesomeIcon icon={faCircle} color={this.state.post_isArrayEmptyRole?"grey":"green"} /></div></Col>
+                <Col lg={2}><div ><FontAwesomeIcon icon={faCircle} color={this.state.post_isArrayEmpty?"grey":"green"} /></div></Col>
                 <Col lg={2}>{this.state.post_isArrayEmpty? <span onClick={this.addPost}>Add</span>: <span onClick={this.deletePost}>Delete</span>}</Col>
                 <Col lg={3}></Col>
             </Row>

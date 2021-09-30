@@ -98,6 +98,7 @@ export default class allUsers extends Component {
       };
       
       const role_add = async () => {
+       
         try {
             const resp = await axios.post(`https://adminop.herokuapp.com/api/user/rolename`, roleDetail);
             console.log(resp);
@@ -137,8 +138,12 @@ export default class allUsers extends Component {
   
  getRoles = async () => {
 
+  let datai= localStorage.getItem("adminToken");
+  datai= JSON.parse(datai)
+  console.log(datai._id)
+
   try {
-      const resp = await axios.get(`https://adminop.herokuapp.com/api/user/rolename`);
+      const resp = await axios.get(`https://adminop.herokuapp.com/api/user/${datai._id}/rolenam/Rolemanagement/GET`);
       console.log("ROLES",resp)
       this.setState({...this.state, rolesList:resp.data})
   } catch (err) {
